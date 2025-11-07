@@ -2,6 +2,11 @@
 
 A complete pixel-art/8-bit retro UI component library with documentation website, built with Next.js, TypeScript, Tailwind CSS, and Radix UI primitives. Inspired by classic 8-bit games and retro computing aesthetics.
 
+[![GitHub](https://img.shields.io/badge/GitHub-Repo-181717?style=for-the-badge&logo=github)](https://github.com/Team-Parashuram/Pixel-art-8-bit)
+[![Portfolio](https://img.shields.io/badge/Portfolio-Website-ff8c00?style=for-the-badge&logo=firefoxbrowser)](https://mishrashardendu22.is-a.dev/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077b5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/shardendumishra22/)
+[![Twitter](https://img.shields.io/badge/Twitter-Follow-1da1f2?style=for-the-badge&logo=twitter)](https://x.com/Shardendu_M)
+
 ![Pixel UI](https://img.shields.io/badge/Pixel%20UI-8--bit%20Components-ff8c00?style=for-the-badge)
 ![TypeScript](https://img.shields.io/badge/TypeScript-Ready-3178c6?style=for-the-badge&logo=typescript)
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=next.js)

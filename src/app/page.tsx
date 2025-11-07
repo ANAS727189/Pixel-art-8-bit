@@ -4,14 +4,12 @@ import Link from "next/link";
 import { categories } from "@/lib/component-registry";
 import { PixelBadge } from "@/components/ui/pixel/pixel-badge";
 import { PixelButton } from "@/components/ui/pixel/pixel-button";
-import { ModeToggle } from "@/components/theme/theme-button";
 import { ArrowRight, Gamepad2, Sparkles, Code, Zap, Copy, Palette, Layers } from "lucide-react";
 import { PixelCard, PixelCardContent, PixelCardDescription, PixelCardFooter, PixelCardHeader, PixelCardTitle } from "@/components/ui/pixel/pixel-card";
 
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-[#f5f5dc] dark:bg-[#000000]">
-                <ModeToggle />
       <section className="container mx-auto px-4 py-20 text-center">
         <div className="flex justify-center mb-6">
           <PixelBadge variant="warning">New Release v1.0</PixelBadge>

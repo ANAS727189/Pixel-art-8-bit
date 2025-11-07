@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { DocsSidebar } from "@/components/docs/sidebar";
 import { CodeBlock } from "@/components/docs/code-block";
 import { PixelButton } from "@/components/ui/pixel/pixel-button";
@@ -9,6 +10,36 @@ import { PixelTabs, PixelTabsContent, PixelTabsList, PixelTabsTrigger } from "@/
 import { componentRegistry } from "@/lib/component-registry";
 import { ComponentExamplePreview } from "./component-example-preview";
 import { ComponentPreview } from "./component-preview";
+
+// Generate metadata for each component page
+export async function generateMetadata(
+  props: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const params = await props.params;
+  const component = componentRegistry.find(c => c.slug === params.slug);
+  
+  if (!component) {
+    return {
+      title: "Component Not Found"
+    };
+  }
+
+  return {
+    title: `${component.title} - Pixel UI`,
+    description: component.description,
+    openGraph: {
+      title: `${component.title} - Pixel UI Component`,
+      description: component.description,
+      type: "article",
+      url: `https://pixel-ui.vercel.app/docs/components/${params.slug}`
+    },
+    twitter: {
+      card: "summary",
+      title: `${component.title} - Pixel UI`,
+      description: component.description
+    }
+  };
+}
 
 
 // Component source code map - TODO: Generate this automatically
