@@ -1,6 +1,7 @@
 "use client";
 
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { DocsSidebar } from "@/components/docs/sidebar";
 import { CodeBlock } from "@/components/docs/code-block";
 import { PixelButton } from "@/components/ui/pixel/pixel-button";
@@ -12,362 +13,233 @@ import { PixelTabs, PixelTabsContent, PixelTabsList, PixelTabsTrigger } from "@/
 import { PixelAccordion, PixelAccordionContent, PixelAccordionItem, PixelAccordionTrigger } from "@/components/ui/pixel/pixel-accordion";
 import { PixelSelect, PixelSelectContent, PixelSelectItem, PixelSelectTrigger, PixelSelectValue } from "@/components/ui/pixel/pixel-select";
 import { useState } from "react";
+import { componentRegistry } from "@/lib/component-registry";
 
-const componentDocs: Record<string, any> = {
-  "pixel-button": {
-    title: "Pixel Button",
-    description: "A retro 8-bit styled button component with pixel-perfect borders and instant state changes.",
-    installation: `npx shadcn@latest add button
-# Then copy the pixel-button.tsx component`,
-    importCode: `import { PixelButton } from "@/components/ui/pixel/pixel-button";`,
-    usageCode: `<PixelButton>Click Me</PixelButton>
-<PixelButton variant="secondary">Secondary</PixelButton>
-<PixelButton variant="ghost">Ghost</PixelButton>
-<PixelButton variant="destructive">Delete</PixelButton>
-<PixelButton size="sm">Small</PixelButton>
-<PixelButton size="lg">Large</PixelButton>`,
-    props: [
-      { name: "variant", type: '"default" | "secondary" | "ghost" | "destructive"', default: '"default"' },
-      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"' },
-      { name: "asChild", type: "boolean", default: "false" },
-    ],
-    examples: [
-      {
-        title: "All Variants",
-        code: `<div className="flex gap-4">
-  <PixelButton variant="default">Default</PixelButton>
-  <PixelButton variant="secondary">Secondary</PixelButton>
-  <PixelButton variant="ghost">Ghost</PixelButton>
-  <PixelButton variant="destructive">Destructive</PixelButton>
-</div>`,
+// Component source code map - TODO: Generate this automatically
+const componentSourceMap: Record<string, string> = {
+  "pixel-button": `"use client";
+
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const pixelButtonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap text-xs font-bold uppercase tracking-wider transition-none duration-0 disabled:pointer-events-none disabled:opacity-50 pixel-borders active:translate-x-[2px] active:translate-y-[2px]",
+  {
+    variants: {
+      variant: {
+        default:
+          "bg-[#ff8c00] text-white border-black hover:bg-[#ff9f1a] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none dark:bg-[#ff8c00] dark:border-[#ff8c00] dark:shadow-[4px_4px_0px_0px_rgba(255,140,0,0.5)]",
+        secondary:
+          "bg-[#ffd700] text-black border-black hover:bg-[#ffe44d] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none dark:bg-[#ffd700] dark:border-[#ffd700] dark:text-black",
+        ghost:
+          "bg-transparent border-black text-black hover:bg-black/10 dark:border-white dark:text-white dark:hover:bg-white/10",
+        destructive:
+          "bg-[#ff0000] text-white border-black hover:bg-[#ff3333] shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none dark:bg-[#cc0000] dark:border-[#ff0000]",
       },
-      {
-        title: "All Sizes",
-        code: `<div className="flex gap-4 items-center">
-  <PixelButton size="sm">Small</PixelButton>
-  <PixelButton size="md">Medium</PixelButton>
-  <PixelButton size="lg">Large</PixelButton>
-</div>`,
+      size: {
+        sm: "h-8 px-3 text-[10px]",
+        md: "h-12 px-6 text-xs",
+        lg: "h-16 px-8 text-sm",
       },
-    ],
-  },
-  "pixel-card": {
-    title: "Pixel Card",
-    description: "A container component with pixel-art styling for displaying content.",
-    installation: `# Copy the pixel-card.tsx component to your project`,
-    importCode: `import { 
-  PixelCard, 
-  PixelCardHeader, 
-  PixelCardTitle, 
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "md",
+    },
+  }
+);
+
+export interface PixelButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof pixelButtonVariants> {
+  asChild?: boolean;
+}
+
+const PixelButton = React.forwardRef<HTMLButtonElement, PixelButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return (
+      <Comp
+        className={cn(pixelButtonVariants({ variant, size, className }))}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+PixelButton.displayName = "PixelButton";
+
+export { PixelButton, pixelButtonVariants };`,
+  
+  "pixel-input": `"use client";
+
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export interface PixelInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
+
+const PixelInput = React.forwardRef<HTMLInputElement, PixelInputProps>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex w-full pixel-borders border-[3px] border-black bg-white px-4 py-3 text-sm transition-none duration-0 file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-black/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#ff8c00] focus-visible:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 dark:border-[#ff8c00] dark:bg-[#1a1a1a] dark:text-white dark:placeholder:text-white/50 dark:focus-visible:ring-[#ffd700]",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+PixelInput.displayName = "PixelInput";
+
+export { PixelInput };`,
+
+  "pixel-badge": `"use client";
+
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+
+const pixelBadgeVariants = cva(
+  "inline-flex items-center pixel-borders border-2 px-3 py-1 text-xs font-bold uppercase tracking-wider transition-none duration-0",
+  {
+    variants: {
+      variant: {
+        default:
+          "bg-[#ff8c00] text-white border-black dark:bg-[#ff8c00] dark:border-[#ff8c00]",
+        success:
+          "bg-[#00ff00] text-black border-black dark:bg-[#00cc00] dark:border-[#00ff00]",
+        warning:
+          "bg-[#ffd700] text-black border-black dark:bg-[#ffd700] dark:border-[#ffd700]",
+        error:
+          "bg-[#ff0000] text-white border-black dark:bg-[#cc0000] dark:border-[#ff0000]",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  }
+);
+
+export interface PixelBadgeProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof pixelBadgeVariants> {}
+
+function PixelBadge({ className, variant, ...props }: PixelBadgeProps) {
+  return (
+    <div className={cn(pixelBadgeVariants({ variant }), className)} {...props} />
+  );
+}
+
+export { PixelBadge, pixelBadgeVariants };`,
+
+  "pixel-card": `"use client";
+
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+const PixelCard = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "pixel-borders border-4 p-6 bg-[#fffacd] border-black shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:bg-[#1a1a1a] dark:border-[#ff8c00] dark:shadow-[6px_6px_0px_0px_rgba(255,140,0,0.3)]",
+      className
+    )}
+    {...props}
+  />
+));
+PixelCard.displayName = "PixelCard";
+
+const PixelCardHeader = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex flex-col space-y-2 pb-4", className)}
+    {...props}
+  />
+));
+PixelCardHeader.displayName = "PixelCardHeader";
+
+const PixelCardTitle = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h3
+    ref={ref}
+    className={cn(
+      "text-base font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] leading-relaxed dark:text-[#ffd700]",
+      className
+    )}
+    {...props}
+  />
+));
+PixelCardTitle.displayName = "PixelCardTitle";
+
+const PixelCardDescription = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p
+    ref={ref}
+    className={cn(
+      "text-sm text-black/80 dark:text-white/80 leading-relaxed",
+      className
+    )}
+    {...props}
+  />
+));
+PixelCardDescription.displayName = "PixelCardDescription";
+
+const PixelCardContent = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn("py-4", className)} {...props} />
+));
+PixelCardContent.displayName = "PixelCardContent";
+
+const PixelCardFooter = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn("flex items-center pt-4", className)}
+    {...props}
+  />
+));
+PixelCardFooter.displayName = "PixelCardFooter";
+
+export {
+  PixelCard,
+  PixelCardHeader,
+  PixelCardFooter,
+  PixelCardTitle,
   PixelCardDescription,
   PixelCardContent,
-  PixelCardFooter 
-} from "@/components/ui/pixel/pixel-card";`,
-    usageCode: `<PixelCard>
-  <PixelCardHeader>
-    <PixelCardTitle>Card Title</PixelCardTitle>
-    <PixelCardDescription>Card description goes here</PixelCardDescription>
-  </PixelCardHeader>
-  <PixelCardContent>
-    <p>Card content</p>
-  </PixelCardContent>
-  <PixelCardFooter>
-    <PixelButton>Action</PixelButton>
-  </PixelCardFooter>
-</PixelCard>`,
-    props: [
-      { name: "className", type: "string", default: "-" },
-    ],
-    examples: [
-      {
-        title: "Basic Card",
-        code: `<PixelCard>
-  <PixelCardHeader>
-    <PixelCardTitle>Retro Gaming</PixelCardTitle>
-    <PixelCardDescription>
-      Experience the nostalgia of 8-bit era
-    </PixelCardDescription>
-  </PixelCardHeader>
-  <PixelCardContent>
-    <p>This card uses pixel-perfect borders and retro styling.</p>
-  </PixelCardContent>
-</PixelCard>`,
-      },
-    ],
-  },
-  "pixel-input": {
-    title: "Pixel Input",
-    description: "A text input field with retro pixel borders and styling.",
-    installation: `# Copy the pixel-input.tsx component`,
-    importCode: `import { PixelInput } from "@/components/ui/pixel/pixel-input";`,
-    usageCode: `<PixelInput type="text" placeholder="Enter text..." />
-<PixelInput type="email" placeholder="Email address" />
-<PixelInput type="password" placeholder="Password" />`,
-    props: [
-      { name: "type", type: "string", default: '"text"' },
-      { name: "placeholder", type: "string", default: "-" },
-      { name: "disabled", type: "boolean", default: "false" },
-    ],
-    examples: [
-      {
-        title: "Input Types",
-        code: `<div className="space-y-4">
-  <PixelInput type="text" placeholder="Text input" />
-  <PixelInput type="email" placeholder="email@example.com" />
-  <PixelInput type="password" placeholder="Password" />
-</div>`,
-      },
-    ],
-  },
-  "pixel-badge": {
-    title: "Pixel Badge",
-    description: "Small status indicators with pixel-art styling and color variants.",
-    installation: `# Copy the pixel-badge.tsx component`,
-    importCode: `import { PixelBadge } from "@/components/ui/pixel/pixel-badge";`,
-    usageCode: `<PixelBadge>Default</PixelBadge>
-<PixelBadge variant="success">Success</PixelBadge>
-<PixelBadge variant="warning">Warning</PixelBadge>
-<PixelBadge variant="error">Error</PixelBadge>`,
-    props: [
-      { name: "variant", type: '"default" | "success" | "warning" | "error"', default: '"default"' },
-    ],
-    examples: [
-      {
-        title: "All Variants",
-        code: `<div className="flex gap-2">
-  <PixelBadge variant="default">Default</PixelBadge>
-  <PixelBadge variant="success">Success</PixelBadge>
-  <PixelBadge variant="warning">Warning</PixelBadge>
-  <PixelBadge variant="error">Error</PixelBadge>
-</div>`,
-      },
-    ],
-  },
-  "pixel-checkbox": {
-    title: "Pixel Checkbox",
-    description: "A checkbox component with pixel-perfect square borders.",
-    installation: `npx shadcn@latest add checkbox
-# Then copy the pixel-checkbox.tsx component`,
-    importCode: `import { PixelCheckbox } from "@/components/ui/pixel/pixel-checkbox";`,
-    usageCode: `<div className="flex items-center space-x-2">
-  <PixelCheckbox id="terms" />
-  <label htmlFor="terms">Accept terms and conditions</label>
-</div>`,
-    props: [
-      { name: "checked", type: "boolean", default: "false" },
-      { name: "disabled", type: "boolean", default: "false" },
-    ],
-    examples: [
-      {
-        title: "Basic Usage",
-        code: `<div className="space-y-2">
-  <div className="flex items-center space-x-2">
-    <PixelCheckbox id="option1" />
-    <label htmlFor="option1">Option 1</label>
-  </div>
-  <div className="flex items-center space-x-2">
-    <PixelCheckbox id="option2" />
-    <label htmlFor="option2">Option 2</label>
-  </div>
-</div>`,
-      },
-    ],
-  },
-  "pixel-select": {
-    title: "Pixel Select",
-    description: "A dropdown select component with pixel-art styling.",
-    installation: `npx shadcn@latest add select
-# Then copy the pixel-select.tsx component`,
-    importCode: `import { 
-  PixelSelect, 
-  PixelSelectContent, 
-  PixelSelectItem, 
-  PixelSelectTrigger, 
-  PixelSelectValue 
-} from "@/components/ui/pixel/pixel-select";`,
-    usageCode: `<PixelSelect>
-  <PixelSelectTrigger>
-    <PixelSelectValue placeholder="Select option" />
-  </PixelSelectTrigger>
-  <PixelSelectContent>
-    <PixelSelectItem value="1">Option 1</PixelSelectItem>
-    <PixelSelectItem value="2">Option 2</PixelSelectItem>
-  </PixelSelectContent>
-</PixelSelect>`,
-    props: [
-      { name: "value", type: "string", default: "-" },
-      { name: "onValueChange", type: "(value: string) => void", default: "-" },
-    ],
-    examples: [
-      {
-        title: "Basic Select",
-        code: `<PixelSelect>
-  <PixelSelectTrigger className="w-[200px]">
-    <PixelSelectValue placeholder="Choose console" />
-  </PixelSelectTrigger>
-  <PixelSelectContent>
-    <PixelSelectItem value="nes">NES</PixelSelectItem>
-    <PixelSelectItem value="snes">SNES</PixelSelectItem>
-    <PixelSelectItem value="gameboy">Game Boy</PixelSelectItem>
-  </PixelSelectContent>
-</PixelSelect>`,
-      },
-    ],
-  },
-  "pixel-tabs": {
-    title: "Pixel Tabs",
-    description: "Tabbed navigation with retro pixel styling.",
-    installation: `npx shadcn@latest add tabs
-# Then copy the pixel-tabs.tsx component`,
-    importCode: `import { PixelTabs, PixelTabsContent, PixelTabsList, PixelTabsTrigger } from "@/components/ui/pixel/pixel-tabs";`,
-    usageCode: `<PixelTabs defaultValue="tab1">
-  <PixelTabsList>
-    <PixelTabsTrigger value="tab1">Tab 1</PixelTabsTrigger>
-    <PixelTabsTrigger value="tab2">Tab 2</PixelTabsTrigger>
-  </PixelTabsList>
-  <PixelTabsContent value="tab1">Content 1</PixelTabsContent>
-  <PixelTabsContent value="tab2">Content 2</PixelTabsContent>
-</PixelTabs>`,
-    props: [
-      { name: "defaultValue", type: "string", default: "-" },
-      { name: "value", type: "string", default: "-" },
-    ],
-    examples: [
-      {
-        title: "Basic Tabs",
-        code: `<PixelTabs defaultValue="account">
-  <PixelTabsList>
-    <PixelTabsTrigger value="account">Account</PixelTabsTrigger>
-    <PixelTabsTrigger value="password">Password</PixelTabsTrigger>
-  </PixelTabsList>
-  <PixelTabsContent value="account">
-    <p>Manage your account settings</p>
-  </PixelTabsContent>
-  <PixelTabsContent value="password">
-    <p>Change your password</p>
-  </PixelTabsContent>
-</PixelTabs>`,
-      },
-    ],
-  },
-  "pixel-accordion": {
-    title: "Pixel Accordion",
-    description: "Collapsible content sections with pixel-art borders.",
-    installation: `npx shadcn@latest add accordion
-# Then copy the pixel-accordion.tsx component`,
-    importCode: `import { PixelAccordion, PixelAccordionContent, PixelAccordionItem, PixelAccordionTrigger } from "@/components/ui/pixel/pixel-accordion";`,
-    usageCode: `<PixelAccordion type="single" collapsible>
-  <PixelAccordionItem value="item-1">
-    <PixelAccordionTrigger>Question 1</PixelAccordionTrigger>
-    <PixelAccordionContent>Answer 1</PixelAccordionContent>
-  </PixelAccordionItem>
-</PixelAccordion>`,
-    props: [
-      { name: "type", type: '"single" | "multiple"', default: '-' },
-      { name: "collapsible", type: "boolean", default: "false" },
-    ],
-    examples: [
-      {
-        title: "FAQ Accordion",
-        code: `<PixelAccordion type="single" collapsible>
-  <PixelAccordionItem value="item-1">
-    <PixelAccordionTrigger>What is Pixel UI?</PixelAccordionTrigger>
-    <PixelAccordionContent>
-      A retro 8-bit component library for React
-    </PixelAccordionContent>
-  </PixelAccordionItem>
-  <PixelAccordionItem value="item-2">
-    <PixelAccordionTrigger>How do I install it?</PixelAccordionTrigger>
-    <PixelAccordionContent>
-      Copy the components to your project
-    </PixelAccordionContent>
-  </PixelAccordionItem>
-</PixelAccordion>`,
-      },
-    ],
-  },
-  "pixel-dialog": {
-    title: "Pixel Dialog",
-    description: "A modal dialog component with pixel-art borders and retro styling.",
-    installation: `npx shadcn@latest add dialog
-# Then copy the pixel-dialog.tsx component`,
-    importCode: `import { 
-  PixelDialog, 
-  PixelDialogContent, 
-  PixelDialogDescription,
-  PixelDialogHeader,
-  PixelDialogTitle,
-  PixelDialogTrigger 
-} from "@/components/ui/pixel/pixel-dialog";`,
-    usageCode: `<PixelDialog>
-  <PixelDialogTrigger>Open</PixelDialogTrigger>
-  <PixelDialogContent>
-    <PixelDialogHeader>
-      <PixelDialogTitle>Title</PixelDialogTitle>
-      <PixelDialogDescription>Description</PixelDialogDescription>
-    </PixelDialogHeader>
-  </PixelDialogContent>
-</PixelDialog>`,
-    props: [
-      { name: "open", type: "boolean", default: "-" },
-      { name: "onOpenChange", type: "(open: boolean) => void", default: "-" },
-    ],
-    examples: [
-      {
-        title: "Basic Dialog",
-        code: `<PixelDialog>
-  <PixelDialogTrigger asChild>
-    <PixelButton>Open Dialog</PixelButton>
-  </PixelDialogTrigger>
-  <PixelDialogContent>
-    <PixelDialogHeader>
-      <PixelDialogTitle>Retro Dialog</PixelDialogTitle>
-      <PixelDialogDescription>
-        This is a pixel-styled dialog component
-      </PixelDialogDescription>
-    </PixelDialogHeader>
-  </PixelDialogContent>
-</PixelDialog>`,
-      },
-    ],
-  },
-  "pixel-toast": {
-    title: "Pixel Toast",
-    description: "Notification component with pixel styling and customizable positions.",
-    installation: `# Copy the pixel-toast.tsx component`,
-    importCode: `import { PixelToastProvider, usePixelToast } from "@/components/ui/pixel/pixel-toast";`,
-    usageCode: `// Wrap your app with PixelToastProvider
-<PixelToastProvider position="bottom-right" duration={3000}>
-  {children}
-</PixelToastProvider>
-
-// Use in component
-const { addToast } = usePixelToast();
-addToast("Hello World!");`,
-    props: [
-      { name: "position", type: '"top-right" | "bottom-right" | "top-left" | "bottom-left"', default: '"bottom-right"' },
-      { name: "duration", type: "number", default: "3000" },
-    ],
-    examples: [
-      {
-        title: "Toast with Action",
-        code: `const { addToast } = usePixelToast();
-
-addToast("File deleted", {
-  label: "Undo",
-  onClick: () => console.log("Undo clicked")
-});`,
-      },
-    ],
-  },
+};`,
 };
 
 export default function ComponentPage({ params }: { params: { slug: string } }) {
-  const doc = componentDocs[params.slug];
+  // Find component from registry
+  const component = componentRegistry.find(c => c.slug === params.slug);
 
-  if (!doc) {
+  if (!component) {
     notFound();
   }
+
+  const componentSource = componentSourceMap[params.slug] || "// Component source code not available yet";
 
   return (
     <div className="min-h-screen bg-[#f5f5dc] dark:bg-[#000000]">
@@ -376,30 +248,40 @@ export default function ComponentPage({ params }: { params: { slug: string } }) 
           <DocsSidebar />
           
           <main className="flex-1 max-w-4xl">
+            {/* Back Button */}
+            <Link href="/docs/components">
+              <PixelButton variant="ghost" size="sm" className="mb-6">
+                ← Back to Components
+              </PixelButton>
+            </Link>
+
             {/* Header */}
             <div className="mb-8">
-              <h1 className="text-4xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] mb-4 dark:text-[#ffd700]">
-                {doc.title}
-              </h1>
-              <p className="text-lg text-black/80 dark:text-white/80">
-                {doc.description}
-              </p>
+              <div className="flex items-center gap-3 mb-4">
+                <h1 className="text-4xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] dark:text-[#ffd700]">
+                  {component.title}
+                </h1>
+                <PixelBadge variant="default">{component.category}</PixelBadge>
+              </div>
+              <p className="text-lg dark:text-white/80">{component.description}</p>
             </div>
 
             {/* Installation */}
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] mb-4 dark:text-[#ffd700]">
-                Installation
-              </h2>
-              <CodeBlock code={doc.installation} language="bash" />
-            </section>
+            {component.installation && (
+              <section className="mb-8">
+                <h2 className="text-2xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] mb-4 dark:text-[#ffd700]">
+                  Installation
+                </h2>
+                <CodeBlock code={component.installation} language="bash" />
+              </section>
+            )}
 
             {/* Import */}
             <section className="mb-8">
               <h2 className="text-2xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] mb-4 dark:text-[#ffd700]">
                 Import
               </h2>
-              <CodeBlock code={doc.importCode} />
+              <CodeBlock code={component.importCode} />
             </section>
 
             {/* Usage */}
@@ -418,13 +300,24 @@ export default function ComponentPage({ params }: { params: { slug: string } }) 
                   </div>
                 </PixelTabsContent>
                 <PixelTabsContent value="code">
-                  <CodeBlock code={doc.usageCode} />
+                  <CodeBlock code={component.usageCode} />
                 </PixelTabsContent>
               </PixelTabs>
             </section>
 
+            {/* Component Source Code */}
+            <section className="mb-8">
+              <h2 className="text-2xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] mb-4 dark:text-[#ffd700]">
+                Component Source
+              </h2>
+              <p className="mb-4 text-sm dark:text-white/70">
+                Copy and paste the following code into your project at <code className="bg-black/10 dark:bg-white/10 px-2 py-1 rounded">{component.componentCode}</code>
+              </p>
+              <CodeBlock code={componentSource} />
+            </section>
+
             {/* Props Table */}
-            {doc.props && doc.props.length > 0 && (
+            {component.props && component.props.length > 0 && (
               <section className="mb-8">
                 <h2 className="text-2xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] mb-4 dark:text-[#ffd700]">
                   Props
@@ -436,14 +329,16 @@ export default function ComponentPage({ params }: { params: { slug: string } }) 
                         <th className="text-left p-3 font-bold uppercase text-xs">Prop</th>
                         <th className="text-left p-3 font-bold uppercase text-xs">Type</th>
                         <th className="text-left p-3 font-bold uppercase text-xs">Default</th>
+                        <th className="text-left p-3 font-bold uppercase text-xs">Description</th>
                       </tr>
                     </thead>
                     <tbody className="bg-white dark:bg-[#1a1a1a]">
-                      {doc.props.map((prop: any, index: number) => (
+                      {component.props.map((prop, index) => (
                         <tr key={index} className="border-t-2 border-black dark:border-[#ff8c00]">
-                          <td className="p-3 font-mono text-sm">{prop.name}</td>
-                          <td className="p-3 font-mono text-sm text-black/70 dark:text-white/70">{prop.type}</td>
-                          <td className="p-3 font-mono text-sm text-black/70 dark:text-white/70">{prop.default}</td>
+                          <td className="p-3 font-mono text-sm font-bold">{prop.name}</td>
+                          <td className="p-3 font-mono text-xs text-black/70 dark:text-white/70">{prop.type}</td>
+                          <td className="p-3 font-mono text-xs text-black/70 dark:text-white/70">{prop.default || '-'}</td>
+                          <td className="p-3 text-sm text-black/70 dark:text-white/70">{prop.description || '-'}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -453,15 +348,31 @@ export default function ComponentPage({ params }: { params: { slug: string } }) 
             )}
 
             {/* Examples */}
-            {doc.examples && doc.examples.length > 0 && (
+            {component.examples && component.examples.length > 0 && (
               <section className="mb-8">
                 <h2 className="text-2xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] mb-4 dark:text-[#ffd700]">
                   Examples
                 </h2>
-                {doc.examples.map((example: any, index: number) => (
+                {component.examples.map((example, index) => (
                   <div key={index} className="mb-6">
-                    <h3 className="text-lg font-bold mb-2">{example.title}</h3>
-                    <CodeBlock code={example.code} />
+                    <h3 className="text-lg font-bold mb-2 dark:text-white">{example.title}</h3>
+                    {example.description && (
+                      <p className="text-sm mb-3 dark:text-white/70">{example.description}</p>
+                    )}
+                    <PixelTabs defaultValue="preview">
+                      <PixelTabsList>
+                        <PixelTabsTrigger value="preview">Preview</PixelTabsTrigger>
+                        <PixelTabsTrigger value="code">Code</PixelTabsTrigger>
+                      </PixelTabsList>
+                      <PixelTabsContent value="preview">
+                        <div className="pixel-borders border-4 border-black p-8 bg-white dark:border-[#ff8c00] dark:bg-[#1a1a1a] min-h-[150px] flex items-center justify-center">
+                          <ComponentExamplePreview code={example.code} slug={params.slug} />
+                        </div>
+                      </PixelTabsContent>
+                      <PixelTabsContent value="code">
+                        <CodeBlock code={example.code} />
+                      </PixelTabsContent>
+                    </PixelTabs>
                   </div>
                 ))}
               </section>
@@ -474,9 +385,9 @@ export default function ComponentPage({ params }: { params: { slug: string } }) 
               </h2>
               <PixelCard>
                 <PixelCardContent className="pt-6">
-                  <p className="text-sm">
-                    This component is built on Radix UI primitives and includes proper ARIA attributes, 
-                    keyboard navigation, and focus management for accessibility.
+                  <p className="text-sm dark:text-white/80">
+                    This component is built with accessibility in mind, including proper ARIA attributes, 
+                    keyboard navigation, and focus management.
                   </p>
                 </PixelCardContent>
               </PixelCard>
@@ -573,4 +484,11 @@ function ComponentPreview({ slug }: { slug: string }) {
     default:
       return <p>Component preview not available</p>;
   }
+}
+
+// Component example preview - dynamically renders example code
+function ComponentExamplePreview({ code, slug }: { code: string; slug: string }) {
+  // For now, return the basic component preview
+  // In a full implementation, you'd parse and render the example code
+  return <ComponentPreview slug={slug} />;
 }
