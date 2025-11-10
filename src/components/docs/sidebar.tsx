@@ -5,14 +5,45 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { componentRegistry, categories } from "@/lib/component-registry";
-import { PixelCollapsible, PixelCollapsibleTrigger, PixelCollapsibleContent } from "@/components/ui/pixel/pixel-collapsible";
-import { ChevronDown } from "lucide-react";
+
+const SCROLL_POSITION_KEY = 'docs-sidebar-scroll';
 
 export function DocsSidebar() {
   const pathname = usePathname();
+  const sidebarRef = React.useRef<HTMLElement>(null);
+
+  // Save scroll position to sessionStorage on scroll
+  React.useEffect(() => {
+    const sidebar = sidebarRef.current;
+    if (!sidebar) return;
+
+    const handleScroll = () => {
+      sessionStorage.setItem(SCROLL_POSITION_KEY, sidebar.scrollTop.toString());
+    };
+
+    sidebar.addEventListener('scroll', handleScroll, { passive: true });
+    return () => sidebar.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Restore scroll position on mount and after navigation
+  React.useEffect(() => {
+    const sidebar = sidebarRef.current;
+    if (!sidebar) return;
+
+    const savedPosition = sessionStorage.getItem(SCROLL_POSITION_KEY);
+    if (savedPosition) {
+      // Use requestAnimationFrame to ensure DOM is ready
+      requestAnimationFrame(() => {
+        sidebar.scrollTop = parseInt(savedPosition, 10);
+      });
+    }
+  }, [pathname]);
 
   return (
-    <aside className="w-64 pixel-borders border-4 border-black bg-[#fffacd] p-6 dark:border-[#ff8c00] dark:bg-[#1a1a1a] h-fit sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto">
+    <aside
+      ref={sidebarRef}
+      className="w-64 pixel-borders border-4 border-black bg-[#fffacd] p-6 dark:border-[#ff8c00] dark:bg-[#1a1a1a] h-fit sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto"
+    >
       <div className="mb-6">
         <Link href="/">
           <h2 className="text-lg font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] dark:text-[#ffd700] hover:text-[#ff8c00] cursor-pointer">

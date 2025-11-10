@@ -46,9 +46,18 @@ export async function generateMetadata(
 // Function to read component source code from file
 async function getComponentSource(slug: string): Promise<string> {
   try {
-    const filePath = path.join(process.cwd(), "src", "components", "ui", "pixel", `${slug}.tsx`);
-    const source = await fs.readFile(filePath, "utf-8");
-    return source;
+    // Try animation components path first
+    let filePath = path.join(process.cwd(), "src", "components", "ui", "pixel", "animations", `${slug}.tsx`);
+    
+    try {
+      const source = await fs.readFile(filePath, "utf-8");
+      return source;
+    } catch {
+      // If not in animations, try regular pixel components
+      filePath = path.join(process.cwd(), "src", "components", "ui", "pixel", `${slug}.tsx`);
+      const source = await fs.readFile(filePath, "utf-8");
+      return source;
+    }
   } catch (error) {
     return `// Component source code not available\n// Error: ${error instanceof Error ? error.message : 'Unknown error'}`;
   }

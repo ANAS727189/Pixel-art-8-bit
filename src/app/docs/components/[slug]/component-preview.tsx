@@ -37,6 +37,41 @@ import { PixelScrollArea } from "@/components/ui/pixel/pixel-scroll-area";
 import { PixelAspectRatio } from "@/components/ui/pixel/pixel-aspect-ratio";
 import { PixelHoverCard, PixelHoverCardContent, PixelHoverCardTrigger } from "@/components/ui/pixel/pixel-hover-card";
 
+// Import animation components
+import { PixelBlurText } from "@/components/ui/pixel/animations/pixel-blur-text";
+import { PixelGlitchText } from "@/components/ui/pixel/animations/pixel-glitch-text";
+import { PixelGradientText } from "@/components/ui/pixel/animations/pixel-gradient-text";
+import { PixelShinyText } from "@/components/ui/pixel/animations/pixel-shiny-text";
+import { PixelCountUp } from "@/components/ui/pixel/animations/pixel-count-up";
+import { PixelCircularText } from "@/components/ui/pixel/animations/pixel-circular-text";
+import { PixelSpotlightCard } from "@/components/ui/pixel/animations/pixel-spotlight-card";
+import { PixelGlareCard } from "@/components/ui/pixel/animations/pixel-glare-card";
+import { PixelSplitText } from "@/components/ui/pixel/animations/pixel-split-text";
+import { PixelRotatingText } from "@/components/ui/pixel/animations/pixel-rotating-text";
+import { PixelLetterGlitch } from "@/components/ui/pixel/animations/pixel-letter-glitch";
+import { PixelShuffleText } from "@/components/ui/pixel/animations/pixel-shuffle-text";
+import { PixelTextPressure } from "@/components/ui/pixel/animations/pixel-text-pressure";
+import { PixelTrueFocus } from "@/components/ui/pixel/animations/pixel-true-focus";
+import { PixelTiltedCard } from "@/components/ui/pixel/animations/pixel-tilted-card";
+import { PixelDecayCard } from "@/components/ui/pixel/animations/pixel-decay-card";
+import { PixelStickerPeel } from "@/components/ui/pixel/animations/pixel-sticker-peel";
+import { PixelBounceCards } from "@/components/ui/pixel/animations/pixel-bounce-cards";
+import { PixelDotGrid } from "@/components/ui/pixel/animations/pixel-dot-grid";
+import { PixelSquares } from "@/components/ui/pixel/animations/pixel-squares";
+import { PixelWaves } from "@/components/ui/pixel/animations/pixel-waves";
+import { PixelRibbons } from "@/components/ui/pixel/animations/pixel-ribbons";
+import { PixelMetaBalls } from "@/components/ui/pixel/animations/pixel-meta-balls";
+import { PixelPlasma } from "@/components/ui/pixel/animations/pixel-plasma";
+import { PixelGridMotion } from "@/components/ui/pixel/animations/pixel-grid-motion";
+import { PixelAurora } from "@/components/ui/pixel/animations/pixel-aurora";
+import { PixelGalaxy } from "@/components/ui/pixel/animations/pixel-galaxy";
+import { PixelRippleGrid } from "@/components/ui/pixel/animations/pixel-ripple-grid";
+import PixelBlobCursor from "@/components/ui/pixel/animations/pixel-blob-cursor";
+import PixelSplashCursor from "@/components/ui/pixel/animations/pixel-splash-cursor";
+import PixelTargetCursor from "@/components/ui/pixel/animations/pixel-target-cursor";
+import PixelTrail from "@/components/ui/pixel/animations/pixel-trail";
+import { PixelImageTrail } from "@/components/ui/pixel/animations/pixel-image-trail";
+
 export function ComponentPreview({ slug }: { slug: string }) {
   const [checked, setChecked] = useState(false);
   const [selectValue, setSelectValue] = useState("");
@@ -450,6 +485,241 @@ export function ComponentPreview({ slug }: { slug: string }) {
             <p>This appears on hover</p>
           </PixelHoverCardContent>
         </PixelHoverCard>
+      );
+    
+    // Animation Components
+    case "pixel-blur-text":
+      return (
+        <div className="space-y-4">
+          <PixelBlurText text="Pixel Perfect!" variant="primary" size="lg" />
+        </div>
+      );
+    
+    case "pixel-glitch-text":
+      return (
+        <div className="space-y-4">
+          <PixelGlitchText text="SYSTEM ERROR" variant="cyber" size="xl" />
+        </div>
+      );
+    
+    case "pixel-gradient-text":
+      return (
+        <div className="space-y-4">
+          <PixelGradientText text="RAINBOW" variant="sunset" size="lg" />
+        </div>
+      );
+    
+    case "pixel-shiny-text":
+      return (
+        <div className="space-y-4">
+          <PixelShinyText text="LEGENDARY" variant="gold" size="lg" />
+        </div>
+      );
+    
+    case "pixel-count-up":
+      return (
+        <div className="space-y-4">
+          <PixelCountUp to={9999} separator="," variant="success" size="xl" />
+        </div>
+      );
+    
+    case "pixel-circular-text":
+      return (
+        <div className="flex justify-center items-center p-12">
+          <PixelCircularText
+            text="ROUND AND ROUND"
+            spinDuration={15}
+            variant="primary"
+            size="lg"
+          />
+        </div>
+      );
+    
+    case "pixel-spotlight-card":
+      return (
+        <PixelSpotlightCard variant="primary" size="md" className="w-full max-w-sm">
+          <h3 className="text-xl font-bold mb-2 dark:text-white">Featured</h3>
+          <p className="dark:text-white/80">Hover to reveal spotlight effect!</p>
+        </PixelSpotlightCard>
+      );
+    
+    case "pixel-glare-card":
+      return (
+        <PixelGlareCard variant="glass" size="md" className="w-full max-w-sm">
+          <h3 className="text-xl font-bold mb-2 dark:text-white">Premium Card</h3>
+          <p className="dark:text-white/80">With beautiful glare effect</p>
+        </PixelGlareCard>
+      );
+
+    case "pixel-split-text":
+      return (
+        <div className="space-y-4">
+          <PixelSplitText text="S P L I T" splitType="chars" />
+        </div>
+      );
+
+    case "pixel-rotating-text":
+      return (
+        <div className="space-y-4">
+          <PixelRotatingText words={["Fast", "Simple", "Pixel"]} />
+        </div>
+      );
+
+    case "pixel-letter-glitch":
+      return (
+        <div className="space-y-4">
+          <PixelLetterGlitch text="GLITCH" />
+        </div>
+      );
+
+    case "pixel-shuffle-text":
+      return (
+        <div className="space-y-4">
+          <PixelShuffleText text="SHUFFLE" />
+        </div>
+      );
+
+    case "pixel-text-pressure":
+      return (
+        <div className="space-y-4">
+          <PixelTextPressure text="PRESS" />
+        </div>
+      );
+
+    case "pixel-true-focus":
+      return (
+        <div className="space-y-4">
+          <PixelTrueFocus sentence="True Focus" />
+        </div>
+      );
+
+    case "pixel-tilted-card":
+      return (
+        <PixelTiltedCard className="w-full max-w-sm" />
+      );
+
+    case "pixel-decay-card":
+      return (
+        <PixelDecayCard className="w-full max-w-sm" />
+      );
+
+    case "pixel-sticker-peel":
+      return (
+        <div className="w-full max-w-sm">
+          <PixelStickerPeel imageSrc="/sticker.png" />
+        </div>
+      );
+
+    case "pixel-bounce-cards":
+      return (
+        <div className="w-full">
+          <PixelBounceCards />
+        </div>
+      );
+
+    case "pixel-dot-grid":
+      return (
+        <div className="w-full h-48">
+          <PixelDotGrid />
+        </div>
+      );
+
+    case "pixel-squares":
+      return (
+        <div className="w-full h-48">
+          <PixelSquares />
+        </div>
+      );
+
+    case "pixel-waves":
+      return (
+        <div className="w-full h-48">
+          <PixelWaves />
+        </div>
+      );
+
+    case "pixel-ribbons":
+      return (
+        <div className="w-full h-48">
+          <PixelRibbons />
+        </div>
+      );
+
+    case "pixel-meta-balls":
+      return (
+        <div className="w-full h-48">
+          <PixelMetaBalls />
+        </div>
+      );
+
+    case "pixel-plasma":
+      return (
+        <div className="w-full h-48">
+          <PixelPlasma />
+        </div>
+      );
+
+    case "pixel-grid-motion":
+      return (
+        <div className="w-full h-48">
+          <PixelGridMotion />
+        </div>
+      );
+
+    case "pixel-aurora":
+      return (
+        <div className="w-full h-48">
+          <PixelAurora />
+        </div>
+      );
+
+    case "pixel-galaxy":
+      return (
+        <div className="w-full h-48">
+          <PixelGalaxy />
+        </div>
+      );
+
+    case "pixel-ripple-grid":
+      return (
+        <div className="w-full h-48">
+          <PixelRippleGrid />
+        </div>
+      );
+
+    case "pixel-blob-cursor":
+      return (
+        <div className="w-full h-48">
+          <PixelBlobCursor />
+        </div>
+      );
+
+    case "pixel-splash-cursor":
+      return (
+        <div className="w-full h-48">
+          <PixelSplashCursor />
+        </div>
+      );
+
+    case "pixel-target-cursor":
+      return (
+        <div className="w-full h-48">
+          <PixelTargetCursor />
+        </div>
+      );
+
+    case "pixel-trail":
+      return (
+        <div className="w-full h-48">
+          <PixelTrail />
+        </div>
+      );
+
+    case "pixel-image-trail":
+      return (
+        <div className="w-full h-48">
+          <PixelImageTrail images={["/example1.png", "/example2.png"]} />
+        </div>
       );
     
     default:

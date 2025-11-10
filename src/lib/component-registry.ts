@@ -4,7 +4,8 @@ export type ComponentCategory =
   | "Feedback"
   | "Navigation"
   | "Display"
-  | "Overlays";
+  | "Overlays"
+  | "Animations";
 
 export interface ComponentExample {
   title: string;
@@ -681,6 +682,538 @@ toast({
     usageCode: `// See examples`,
     componentCode: `/src/components/ui/pixel-carousel.tsx`,
   },
+
+  // Animations - Text Effects
+  {
+    slug: "pixel-blur-text",
+    title: "Blur Text",
+    description: "Animated text that fades in from blur on scroll or hover.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelBlurText } from "@/components/ui/pixel/animations/pixel-blur-text"`,
+    usageCode: `<PixelBlurText text="Hello World" variant="primary" size="lg" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-blur-text.tsx`,
+    props: [
+      { name: "text", type: "string", description: "The text to display" },
+      { name: "duration", type: "number", default: "1", description: "Animation duration in seconds" },
+      { name: "animateOnHover", type: "boolean", default: "false", description: "Trigger animation on hover instead of scroll" },
+      { name: "variant", type: '"default" | "primary" | "secondary" | "accent"', default: '"default"', description: "Color variant" },
+      { name: "size", type: '"sm" | "md" | "lg" | "xl"', default: '"md"', description: "Text size" },
+    ],
+    examples: [
+      {
+        title: "Basic Usage",
+        code: `<PixelBlurText text="Pixel Perfect!" variant="primary" size="lg" />`,
+      },
+      {
+        title: "Hover Triggered",
+        code: `<PixelBlurText 
+  text="Hover Me" 
+  variant="accent" 
+  size="md"
+  animateOnHover={true}
+/>`,
+      },
+    ],
+  },
+  {
+    slug: "pixel-glitch-text",
+    title: "Glitch Text",
+    description: "Retro glitch effect text animation with cyber aesthetics.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelGlitchText } from "@/components/ui/pixel/animations/pixel-glitch-text"`,
+    usageCode: `<PixelGlitchText text="GLITCH" variant="cyber" size="xl" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-glitch-text.tsx`,
+    props: [
+      { name: "text", type: "string", description: "The text to display" },
+      { name: "speed", type: "number", default: "0.5", description: "Animation speed multiplier" },
+      { name: "enableShadows", type: "boolean", default: "true", description: "Show glitch shadow effects" },
+      { name: "enableOnHover", type: "boolean", default: "false", description: "Only glitch on hover" },
+      { name: "variant", type: '"default" | "primary" | "secondary" | "cyber"', default: '"default"', description: "Color variant" },
+    ],
+    examples: [
+      {
+        title: "Cyber Style",
+        code: `<PixelGlitchText 
+  text="SYSTEM ERROR" 
+  variant="cyber" 
+  size="xl"
+  speed={0.8}
+/>`,
+      },
+      {
+        title: "Hover Effect",
+        code: `<PixelGlitchText 
+  text="CLICK ME" 
+  variant="primary"
+  enableOnHover={true}
+/>`,
+      },
+    ],
+  },
+  {
+    slug: "pixel-gradient-text",
+    title: "Gradient Text",
+    description: "Animated gradient text with smooth color transitions.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelGradientText } from "@/components/ui/pixel/animations/pixel-gradient-text"`,
+    usageCode: `<PixelGradientText text="RAINBOW" variant="sunset" size="lg" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-gradient-text.tsx`,
+    props: [
+      { name: "text", type: "string", description: "The text to display" },
+      { name: "animationSpeed", type: "number", default: "8", description: "Gradient animation speed in seconds" },
+      { name: "showBorder", type: "boolean", default: "false", description: "Show pixel border around text" },
+      { name: "variant", type: '"sunset" | "ocean" | "forest" | "cyber" | "gold"', default: '"sunset"', description: "Gradient color scheme" },
+    ],
+    examples: [
+      {
+        title: "Sunset Gradient",
+        code: `<PixelGradientText 
+  text="SUNSET VIBES" 
+  variant="sunset" 
+  size="xl"
+  animationSpeed={6}
+/>`,
+      },
+      {
+        title: "With Border",
+        code: `<PixelGradientText 
+  text="BORDERED" 
+  variant="ocean"
+  showBorder={true}
+/>`,
+      },
+    ],
+  },
+  {
+    slug: "pixel-shiny-text",
+    title: "Shiny Text",
+    description: "Metallic sheen effect that sweeps across text.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelShinyText } from "@/components/ui/pixel/animations/pixel-shiny-text"`,
+    usageCode: `<PixelShinyText text="GOLD" variant="gold" size="lg" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-shiny-text.tsx`,
+    props: [
+      { name: "text", type: "string", description: "The text to display" },
+      { name: "speed", type: "number", default: "5", description: "Shine animation speed in seconds" },
+      { name: "disabled", type: "boolean", default: "false", description: "Disable animation" },
+      { name: "variant", type: '"gold" | "silver" | "rainbow" | "fire"', default: '"gold"', description: "Shine color" },
+    ],
+    examples: [
+      {
+        title: "Gold Shine",
+        code: `<PixelShinyText 
+  text="LEGENDARY" 
+  variant="gold" 
+  size="xl"
+  speed={3}
+/>`,
+      },
+    ],
+  },
+  {
+    slug: "pixel-count-up",
+    title: "Count Up",
+    description: "Animated number counter with customizable formatting.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelCountUp } from "@/components/ui/pixel/animations/pixel-count-up"`,
+    usageCode: `<PixelCountUp to={1000} duration={2} separator="," />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-count-up.tsx`,
+    props: [
+      { name: "to", type: "number", description: "Target number to count to" },
+      { name: "from", type: "number", default: "0", description: "Starting number" },
+      { name: "duration", type: "number", default: "2", description: "Animation duration in seconds" },
+      { name: "delay", type: "number", default: "0", description: "Delay before animation starts" },
+      { name: "separator", type: "string", default: '""', description: "Thousands separator" },
+      { name: "prefix", type: "string", default: '""', description: "Prefix (e.g., '$')" },
+      { name: "suffix", type: "string", default: '""', description: "Suffix (e.g., '+')" },
+    ],
+    examples: [
+      {
+        title: "Currency Counter",
+        code: `<PixelCountUp 
+  to={9999} 
+  prefix="$" 
+  separator=","
+  variant="success"
+  size="xl"
+/>`,
+      },
+      {
+        title: "Score Counter",
+        code: `<PixelCountUp 
+  to={1000000} 
+  suffix="pts"
+  duration={3}
+  variant="primary"
+/>`,
+      },
+    ],
+  },
+  {
+    slug: "pixel-circular-text",
+    title: "Circular Text",
+    description: "Text arranged in a circle with rotation animation.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelCircularText } from "@/components/ui/pixel/animations/pixel-circular-text"`,
+    usageCode: `<PixelCircularText text="ROTATING TEXT" spinDuration={20} />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-circular-text.tsx`,
+    props: [
+      { name: "text", type: "string", description: "The text to display in a circle" },
+      { name: "spinDuration", type: "number", default: "20", description: "Rotation duration in seconds" },
+      { name: "onHover", type: '"slowDown" | "speedUp" | "pause" | "reverse"', default: '"speedUp"', description: "Hover behavior" },
+    ],
+    examples: [
+      {
+        title: "Basic Rotation",
+        code: `<PixelCircularText 
+  text="ROUND AND ROUND" 
+  spinDuration={15}
+  variant="primary"
+  size="lg"
+/>`,
+      },
+    ],
+  },
+
+  // Animations - Card Effects
+  {
+    slug: "pixel-spotlight-card",
+    title: "Spotlight Card",
+    description: "Card with animated spotlight effect following the cursor.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelSpotlightCard } from "@/components/ui/pixel/animations/pixel-spotlight-card"`,
+    usageCode: `<PixelSpotlightCard variant="primary" size="md">
+  <h3>Card Content</h3>
+</PixelSpotlightCard>`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-spotlight-card.tsx`,
+    props: [
+      { name: "spotlightColor", type: "string", default: '"rgba(255, 215, 0, 0.3)"', description: "Spotlight color in rgba format" },
+      { name: "spotlightSize", type: "number", default: "200", description: "Spotlight radius in pixels" },
+      { name: "variant", type: '"default" | "primary" | "secondary" | "accent"', default: '"default"', description: "Card style variant" },
+    ],
+    examples: [
+      {
+        title: "Primary Spotlight",
+        code: `<PixelSpotlightCard 
+  variant="primary" 
+  size="lg"
+  spotlightColor="rgba(255, 140, 0, 0.4)"
+  spotlightSize={250}
+>
+  <h3 className="text-2xl font-bold mb-2">Featured</h3>
+  <p>Hover to reveal spotlight effect!</p>
+</PixelSpotlightCard>`,
+      },
+    ],
+  },
+  {
+    slug: "pixel-glare-card",
+    title: "Glare Card",
+    description: "Card with glare/shine effect on hover.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelGlareCard } from "@/components/ui/pixel/animations/pixel-glare-card"`,
+    usageCode: `<PixelGlareCard variant="glass" size="md">
+  <h3>Shiny Card</h3>
+</PixelGlareCard>`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-glare-card.tsx`,
+    props: [
+      { name: "glareColor", type: "string", default: '"#ffffff"', description: "Glare color" },
+      { name: "glareOpacity", type: "number", default: "0.5", description: "Glare opacity (0-1)" },
+      { name: "glareSize", type: "number", default: "250", description: "Glare gradient size" },
+      { name: "playOnce", type: "boolean", default: "false", description: "Only play animation once" },
+    ],
+    examples: [
+      {
+        title: "Glass Effect",
+        code: `<PixelGlareCard 
+  variant="glass" 
+  glareColor="#ffd700"
+  glareOpacity={0.6}
+>
+  <div className="p-6">
+    <h3>Premium Card</h3>
+    <p>With beautiful glare effect</p>
+  </div>
+</PixelGlareCard>`,
+      },
+    ],
+  },
+  
+  // Additional Text Animations
+  {
+    slug: "pixel-ascii-text",
+    title: "ASCII Text",
+    description: "Convert text to ASCII art with animation effects.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelASCIIText } from "@/components/ui/pixel/animations/pixel-ascii-text"`,
+    usageCode: `<PixelASCIIText text="PIXEL" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-ascii-text.tsx`,
+  },
+  {
+    slug: "pixel-split-text",
+    title: "Split Text",
+    description: "Text animation with split and stagger effects.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelSplitText } from "@/components/ui/pixel/animations/pixel-split-text"`,
+    usageCode: `<PixelSplitText text="SPLIT" splitType="chars" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-split-text.tsx`,
+  },
+  {
+    slug: "pixel-rotating-text",
+    title: "Rotating Text",
+    description: "Text that rotates through multiple words or phrases.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelRotatingText } from "@/components/ui/pixel/animations/pixel-rotating-text"`,
+    usageCode: `<PixelRotatingText words={["Fast", "Simple", "Pixel"]} />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-rotating-text.tsx`,
+  },
+  {
+    slug: "pixel-letter-glitch",
+    title: "Letter Glitch",
+    description: "Individual letter glitch effect with random characters.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelLetterGlitch } from "@/components/ui/pixel/animations/pixel-letter-glitch"`,
+    usageCode: `<PixelLetterGlitch />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-letter-glitch.tsx`,
+  },
+  {
+    slug: "pixel-shuffle-text",
+    title: "Shuffle Text",
+    description: "Text shuffle animation with scramble effect.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelShuffleText } from "@/components/ui/pixel/animations/pixel-shuffle-text"`,
+    usageCode: `<PixelShuffleText text="SHUFFLE" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-shuffle-text.tsx`,
+  },
+  {
+    slug: "pixel-text-pressure",
+    title: "Text Pressure",
+    description: "Text that responds to mouse pressure with variable font.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelTextPressure } from "@/components/ui/pixel/animations/pixel-text-pressure"`,
+    usageCode: `<PixelTextPressure text="PRESS" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-text-pressure.tsx`,
+  },
+  {
+    slug: "pixel-true-focus",
+    title: "True Focus",
+    description: "Text with focus animation highlighting one word at a time.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelTrueFocus } from "@/components/ui/pixel/animations/pixel-true-focus"`,
+    usageCode: `<PixelTrueFocus sentence="True Focus" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-true-focus.tsx`,
+  },
+
+  // Additional Card Effects
+  {
+    slug: "pixel-tilted-card",
+    title: "Tilted Card",
+    description: "3D tilting card effect that follows mouse movement.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelTiltedCard } from "@/components/ui/pixel/animations/pixel-tilted-card"`,
+    usageCode: `<PixelTiltedCard imageSrc="/image.jpg" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-tilted-card.tsx`,
+  },
+  {
+    slug: "pixel-decay-card",
+    title: "Decay Card",
+    description: "Card with decay/disintegration effect on hover.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelDecayCard } from "@/components/ui/pixel/animations/pixel-decay-card"`,
+    usageCode: `<PixelDecayCard image="/image.jpg" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-decay-card.tsx`,
+  },
+  {
+    slug: "pixel-sticker-peel",
+    title: "Sticker Peel",
+    description: "Draggable sticker with peel-back effect.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelStickerPeel } from "@/components/ui/pixel/animations/pixel-sticker-peel"`,
+    usageCode: `<PixelStickerPeel imageSrc="/sticker.png" />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-sticker-peel.tsx`,
+  },
+  {
+    slug: "pixel-bounce-cards",
+    title: "Bounce Cards",
+    description: "Cards with bouncy hover animations.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelBounceCards } from "@/components/ui/pixel/animations/pixel-bounce-cards"`,
+    usageCode: `<PixelBounceCards />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-bounce-cards.tsx`,
+  },
+
+  // Background Effects
+  {
+    slug: "pixel-dot-grid",
+    title: "Dot Grid",
+    description: "Interactive dot grid background with mouse effects.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelDotGrid } from "@/components/ui/pixel/animations/pixel-dot-grid"`,
+    usageCode: `<PixelDotGrid />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-dot-grid.tsx`,
+  },
+  {
+    slug: "pixel-squares",
+    title: "Squares",
+    description: "Animated square grid background.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelSquares } from "@/components/ui/pixel/animations/pixel-squares"`,
+    usageCode: `<PixelSquares />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-squares.tsx`,
+  },
+  {
+    slug: "pixel-waves",
+    title: "Waves",
+    description: "Wave animation background with mouse interaction.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelWaves } from "@/components/ui/pixel/animations/pixel-waves"`,
+    usageCode: `<PixelWaves />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-waves.tsx`,
+  },
+  {
+    slug: "pixel-ribbons",
+    title: "Ribbons",
+    description: "Flowing ribbon effects following the cursor.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelRibbons } from "@/components/ui/pixel/animations/pixel-ribbons"`,
+    usageCode: `<PixelRibbons />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-ribbons.tsx`,
+  },
+  {
+    slug: "pixel-meta-balls",
+    title: "Meta Balls",
+    description: "Liquid meta balls effect with blob interactions.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelMetaBalls } from "@/components/ui/pixel/animations/pixel-meta-balls"`,
+    usageCode: `<PixelMetaBalls />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-meta-balls.tsx`,
+  },
+  {
+    slug: "pixel-plasma",
+    title: "Plasma",
+    description: "Animated plasma background effect.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelPlasma } from "@/components/ui/pixel/animations/pixel-plasma"`,
+    usageCode: `<PixelPlasma />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-plasma.tsx`,
+  },
+  {
+    slug: "pixel-grid-motion",
+    title: "Grid Motion",
+    description: "Grid with motion effects based on mouse position.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelGridMotion } from "@/components/ui/pixel/animations/pixel-grid-motion"`,
+    usageCode: `<PixelGridMotion />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-grid-motion.tsx`,
+  },
+  {
+    slug: "pixel-aurora",
+    title: "Aurora",
+    description: "Aurora borealis background effect.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelAurora } from "@/components/ui/pixel/animations/pixel-aurora"`,
+    usageCode: `<PixelAurora />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-aurora.tsx`,
+  },
+  {
+    slug: "pixel-galaxy",
+    title: "Galaxy",
+    description: "Animated galaxy/space background.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelGalaxy } from "@/components/ui/pixel/animations/pixel-galaxy"`,
+    usageCode: `<PixelGalaxy />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-galaxy.tsx`,
+  },
+  {
+    slug: "pixel-ripple-grid",
+    title: "Ripple Grid",
+    description: "Grid with ripple wave effects.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelRippleGrid } from "@/components/ui/pixel/animations/pixel-ripple-grid"`,
+    usageCode: `<PixelRippleGrid />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-ripple-grid.tsx`,
+  },
+
+  // Cursor Effects
+  {
+    slug: "pixel-blob-cursor",
+    title: "Blob Cursor",
+    description: "Blob-shaped cursor effect that follows the mouse.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelBlobCursor } from "@/components/ui/pixel/animations/pixel-blob-cursor"`,
+    usageCode: `<PixelBlobCursor />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-blob-cursor.tsx`,
+  },
+  {
+    slug: "pixel-splash-cursor",
+    title: "Splash Cursor",
+    description: "Fluid splash effect following cursor movement.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelSplashCursor } from "@/components/ui/pixel/animations/pixel-splash-cursor"`,
+    usageCode: `<PixelSplashCursor />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-splash-cursor.tsx`,
+  },
+  {
+    slug: "pixel-target-cursor",
+    title: "Target Cursor",
+    description: "Targeting crosshair cursor effect.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelTargetCursor } from "@/components/ui/pixel/animations/pixel-target-cursor"`,
+    usageCode: `<PixelTargetCursor />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-target-cursor.tsx`,
+  },
+  {
+    slug: "pixel-trail",
+    title: "Pixel Trail",
+    description: "Pixelated trail following the cursor.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelTrail } from "@/components/ui/pixel/animations/pixel-trail"`,
+    usageCode: `<PixelTrail />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-trail.tsx`,
+  },
+  {
+    slug: "pixel-image-trail",
+    title: "Image Trail",
+    description: "Image trail effect following mouse movement.",
+    category: "Animations",
+    installation: "",
+    importCode: `import { PixelImageTrail } from "@/components/ui/pixel/animations/pixel-image-trail"`,
+    usageCode: `<PixelImageTrail images={[]} />`,
+    componentCode: `/src/components/ui/pixel/animations/pixel-image-trail.tsx`,
+  },
 ];
 
 export function getComponentBySlug(slug: string): ComponentDoc | undefined {
@@ -692,6 +1225,7 @@ export function getComponentsByCategory(category: ComponentCategory): ComponentD
 }
 
 export const categories: ComponentCategory[] = [
+  "Animations",
   "Forms",
   "Display",
   "Feedback",
