@@ -275,13 +275,13 @@ const PixelHeroPattern = React.forwardRef<
   }
 >(({ className, pattern = "dots", animate = false, ...props }, ref) => {
   const patternClasses = {
-    dots: "bg-[radial-gradient(circle,_rgba(0,0,0,0.1)_1px,_transparent_1px)] bg-[size:20px_20px] dark:bg-[radial-gradient(circle,_rgba(255,255,255,0.05)_1px,_transparent_1px)]",
-    grid: "bg-[linear-gradient(rgba(0,0,0,0.05)_1px,_transparent_1px),linear-gradient(90deg,_rgba(0,0,0,0.05)_1px,_transparent_1px)] bg-[size:20px_20px] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_1px,_transparent_1px),linear-gradient(90deg,_rgba(255,255,255,0.03)_1px,_transparent_1px)]",
-    checkerboard: "bg-[linear-gradient(45deg,_rgba(0,0,0,0.05)_25%,_transparent_25%,_transparent_75%,_rgba(0,0,0,0.05)_75%),linear-gradient(45deg,_rgba(0,0,0,0.05)_25%,_transparent_25%,_transparent_75%,_rgba(0,0,0,0.05)_75%)] bg-[size:40px_40px] bg-[position:0_0,20px_20px] dark:bg-[linear-gradient(45deg,_rgba(255,255,255,0.03)_25%,_transparent_25%,_transparent_75%,_rgba(255,255,255,0.03)_75%),linear-gradient(45deg,_rgba(255,255,255,0.03)_25%,_transparent_25%,_transparent_75%,_rgba(255,255,255,0.03)_75%)]",
-    scanlines: "bg-[linear-gradient(0deg,_rgba(0,0,0,0.05)_50%,_transparent_50%)] bg-[size:100%_4px] dark:bg-[linear-gradient(0deg,_rgba(255,255,255,0.03)_50%,_transparent_50%)]",
-    diagonal: "bg-[repeating-linear-gradient(45deg,_rgba(0,0,0,0.03),_rgba(0,0,0,0.03)_10px,_transparent_10px,_transparent_20px)] dark:bg-[repeating-linear-gradient(45deg,_rgba(255,255,255,0.02),_rgba(255,255,255,0.02)_10px,_transparent_10px,_transparent_20px)]",
-    cross: "bg-[linear-gradient(rgba(0,0,0,0.05)_2px,_transparent_2px),linear-gradient(90deg,_rgba(0,0,0,0.05)_2px,_transparent_2px)] bg-[size:20px_20px] dark:bg-[linear-gradient(rgba(255,255,255,0.03)_2px,_transparent_2px),linear-gradient(90deg,_rgba(255,255,255,0.03)_2px,_transparent_2px)]",
-    waves: "bg-[repeating-radial-gradient(circle_at_0_0,_transparent_0,_rgba(0,0,0,0.03)_10px,_transparent_20px)] dark:bg-[repeating-radial-gradient(circle_at_0_0,_transparent_0,_rgba(255,255,255,0.02)_10px,_transparent_20px)]",
+    dots: "bg-[radial-gradient(circle,_rgba(0,0,0,0.15)_1px,_transparent_1px)] bg-[size:20px_20px] dark:bg-[radial-gradient(circle,_rgba(255,255,255,0.1)_1px,_transparent_1px)]",
+    grid: "bg-[linear-gradient(rgba(0,0,0,0.1)_1px,_transparent_1px),linear-gradient(90deg,_rgba(0,0,0,0.1)_1px,_transparent_1px)] bg-[size:20px_20px] dark:bg-[linear-gradient(rgba(255,255,255,0.08)_1px,_transparent_1px),linear-gradient(90deg,_rgba(255,255,255,0.08)_1px,_transparent_1px)]",
+    checkerboard: "bg-[linear-gradient(45deg,_rgba(0,0,0,0.1)_25%,_transparent_25%,_transparent_75%,_rgba(0,0,0,0.1)_75%),linear-gradient(45deg,_rgba(0,0,0,0.1)_25%,_transparent_25%,_transparent_75%,_rgba(0,0,0,0.1)_75%)] bg-[size:40px_40px] bg-[position:0_0,20px_20px] dark:bg-[linear-gradient(45deg,_rgba(255,255,255,0.08)_25%,_transparent_25%,_transparent_75%,_rgba(255,255,255,0.08)_75%),linear-gradient(45deg,_rgba(255,255,255,0.08)_25%,_transparent_25%,_transparent_75%,_rgba(255,255,255,0.08)_75%)]",
+    scanlines: "bg-[linear-gradient(0deg,_rgba(0,0,0,0.1)_50%,_transparent_50%)] bg-[size:100%_4px] dark:bg-[linear-gradient(0deg,_rgba(255,255,255,0.08)_50%,_transparent_50%)]",
+    diagonal: "bg-[repeating-linear-gradient(45deg,_rgba(0,0,0,0.08),_rgba(0,0,0,0.08)_10px,_transparent_10px,_transparent_20px)] dark:bg-[repeating-linear-gradient(45deg,_rgba(255,255,255,0.06),_rgba(255,255,255,0.06)_10px,_transparent_10px,_transparent_20px)]",
+    cross: "bg-[linear-gradient(rgba(0,0,0,0.1)_2px,_transparent_2px),linear-gradient(90deg,_rgba(0,0,0,0.1)_2px,_transparent_2px)] bg-[size:20px_20px] dark:bg-[linear-gradient(rgba(255,255,255,0.08)_2px,_transparent_2px),linear-gradient(90deg,_rgba(255,255,255,0.08)_2px,_transparent_2px)]",
+    waves: "bg-[repeating-radial-gradient(circle_at_0_0,_transparent_0,_rgba(0,0,0,0.08)_10px,_transparent_20px)] dark:bg-[repeating-radial-gradient(circle_at_0_0,_transparent_0,_rgba(255,255,255,0.06)_10px,_transparent_20px)]",
   };
 
   return (
@@ -308,7 +308,7 @@ const PixelHeroFloatingElement = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "absolute opacity-20 dark:opacity-10 pointer-events-none",
+      "absolute opacity-40 dark:opacity-30 pointer-events-none",
       className
     )}
     style={{
@@ -338,7 +338,7 @@ const PixelHeroCornerDecor = React.forwardRef<
     <div
       ref={ref}
       className={cn(
-        "absolute w-12 h-12 pixel-borders border-4 border-current opacity-20",
+        "absolute w-12 h-12 pixel-borders border-4 border-current opacity-50 dark:opacity-40",
         positionClasses[position],
         className
       )}
@@ -388,7 +388,7 @@ const PixelHeroGlowText = React.forwardRef<
     ref={ref}
     className={cn("relative inline-block", className)}
     style={{
-      textShadow: `0 0 10px ${color}, 0 0 20px ${color}, 0 0 30px ${color}`,
+      textShadow: `0 0 10px ${color}, 0 0 20px ${color}, 0 0 40px ${color}, 0 0 60px ${color}`,
     }}
     {...props}
   >

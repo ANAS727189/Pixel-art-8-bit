@@ -143,10 +143,10 @@ export default function HeroExamplesPage() {
             <PixelHeroPattern pattern="diagonal" />
             
             {/* Animated elements */}
-            <PixelHeroFloatingElement className="top-10 right-10 text-7xl opacity-30" delay={0.5}>
+            <PixelHeroFloatingElement className="top-10 right-10 text-7xl" delay={0.5}>
               🚀
             </PixelHeroFloatingElement>
-            <PixelHeroFloatingElement className="bottom-20 left-10 text-6xl opacity-30" delay={1.5}>
+            <PixelHeroFloatingElement className="bottom-20 left-10 text-6xl" delay={1.5}>
               ✨
             </PixelHeroFloatingElement>
             
@@ -208,7 +208,7 @@ export default function HeroExamplesPage() {
           </div>
           
           <PixelHero variant="gradient" size="xl" className="relative overflow-hidden">
-            <PixelHeroPattern pattern="waves" animate className="opacity-20" />
+            <PixelHeroPattern pattern="waves" animate />
             
             {/* Floating decorative elements */}
             <PixelHeroFloatingElement className="top-20 right-20 text-6xl" delay={0}>
@@ -291,8 +291,8 @@ export default function HeroExamplesPage() {
           </div>
           
           <PixelHero variant="neon" size="xl" className="relative overflow-hidden">
-            <PixelHeroPattern pattern="grid" className="opacity-30" />
-            <PixelHeroPattern pattern="scanlines" animate className="opacity-20" />
+            <PixelHeroPattern pattern="grid" />
+            <PixelHeroPattern pattern="scanlines" animate />
             
             {/* Corner decorations */}
             <PixelHeroCornerDecor position="top-left" className="text-[#00ff88]" />
@@ -368,7 +368,7 @@ export default function HeroExamplesPage() {
           </div>
           
           <PixelHero variant="default" size="xl" align="left" className="relative overflow-hidden">
-            <PixelHeroPattern pattern="checkerboard" className="opacity-10" />
+            <PixelHeroPattern pattern="checkerboard" />
             
             <PixelHeroGrid>
               <PixelHeroContent className="mx-0 relative z-10">
@@ -425,7 +425,7 @@ export default function HeroExamplesPage() {
               
               <PixelHeroImage className="relative">
                 <div className="aspect-square bg-gradient-to-br from-[#ff8c00] via-[#ffa500] to-[#ffd700] flex items-center justify-center border-8 border-black relative overflow-hidden">
-                  <PixelHeroPattern pattern="grid" className="opacity-20" />
+                  <PixelHeroPattern pattern="grid" />
                   <div className="text-9xl relative z-10 animate-pulse">🎮</div>
                   <div className="absolute top-4 left-4 text-4xl">⭐</div>
                   <div className="absolute bottom-4 right-4 text-4xl">�</div>
@@ -449,7 +449,7 @@ export default function HeroExamplesPage() {
           </div>
           
           <PixelHero variant="retro" size="xl" className="relative overflow-hidden">
-            <PixelHeroPattern pattern="cross" className="opacity-20" />
+            <PixelHeroPattern pattern="cross" />
             
             <PixelHeroCornerDecor position="top-left" className="text-[#8b4513]" />
             <PixelHeroCornerDecor position="bottom-right" className="text-[#8b4513]" />
@@ -556,26 +556,26 @@ export default function HeroExamplesPage() {
           </div>
           
           <PixelHero variant="gradient" size="full" className="relative overflow-hidden">
-            <PixelHeroPattern pattern="grid" className="opacity-20" />
-            <PixelHeroPattern pattern="dots" animate className="opacity-10" />
+            <PixelHeroPattern pattern="grid" />
+            <PixelHeroPattern pattern="dots" animate />
             
             {/* Multiple floating elements for dramatic effect */}
-            <PixelHeroFloatingElement className="top-10 left-10 text-7xl opacity-40" delay={0}>
+            <PixelHeroFloatingElement className="top-10 left-10 text-7xl" delay={0}>
               🚀
             </PixelHeroFloatingElement>
-            <PixelHeroFloatingElement className="top-20 right-20 text-6xl opacity-40" delay={0.5}>
+            <PixelHeroFloatingElement className="top-20 right-20 text-6xl" delay={0.5}>
               ⭐
             </PixelHeroFloatingElement>
-            <PixelHeroFloatingElement className="bottom-32 left-32 text-6xl opacity-40" delay={1}>
+            <PixelHeroFloatingElement className="bottom-32 left-32 text-6xl" delay={1}>
               💎
             </PixelHeroFloatingElement>
-            <PixelHeroFloatingElement className="bottom-20 right-32 text-7xl opacity-40" delay={1.5}>
+            <PixelHeroFloatingElement className="bottom-20 right-32 text-7xl" delay={1.5}>
               ✨
             </PixelHeroFloatingElement>
-            <PixelHeroFloatingElement className="top-1/2 left-20 text-5xl opacity-30" delay={2}>
+            <PixelHeroFloatingElement className="top-1/2 left-20 text-5xl" delay={2}>
               🎮
             </PixelHeroFloatingElement>
-            <PixelHeroFloatingElement className="top-1/3 right-24 text-5xl opacity-30" delay={2.5}>
+            <PixelHeroFloatingElement className="top-1/3 right-24 text-5xl" delay={2.5}>
               🏆
             </PixelHeroFloatingElement>
             
@@ -651,7 +651,7 @@ export default function HeroExamplesPage() {
           </div>
           
           <PixelHero variant="secondary" size="md" className="relative overflow-hidden">
-            <PixelHeroPattern pattern="checkerboard" className="opacity-10" />
+            <PixelHeroPattern pattern="checkerboard" />
             
             <PixelHeroContent>
               <PixelHeroBadge variant="default" className="mb-3">
