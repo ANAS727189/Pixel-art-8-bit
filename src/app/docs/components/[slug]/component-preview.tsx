@@ -1074,48 +1074,56 @@ Try: hello, info, joke
         />
       );
     
-    case "pixel-health-bar":
+    case "pixel-game-ui":
       return (
-        <div className="space-y-4 max-w-2xl mx-auto">
-          <PixelHealthBar current={85} max={100} label="HP" />
-          <PixelManaBar current={60} max={100} label="MP" />
-          <PixelXPBar currentXP={350} requiredXP={500} level={12} />
-        </div>
-      );
-    
-    case "pixel-inventory":
-      return (
-        <PixelInventory columns={5} title="Inventory" className="max-w-md mx-auto">
-          <PixelInventorySlot item="⚔️" rarity="legendary" />
-          <PixelInventorySlot item="🛡️" rarity="epic" />
-          <PixelInventorySlot item="💊" count={5} rarity="common" />
-          <PixelInventorySlot item="🔮" rarity="rare" />
-          <PixelInventorySlot item="👑" rarity="legendary" />
-          <PixelInventorySlot isEmpty />
-          <PixelInventorySlot isEmpty />
-          <PixelInventorySlot isEmpty />
-          <PixelInventorySlot isEmpty />
-          <PixelInventorySlot isEmpty />
-        </PixelInventory>
-      );
-    
-    case "pixel-achievement":
-      return (
-        <div className="space-y-4 max-w-md mx-auto">
+        <div className="space-y-8 max-w-4xl mx-auto">
+          {/* Character Stats Section */}
+          <div className="border-4 border-black p-6 bg-white dark:bg-[#2a2a2a] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-16 h-16 border-4 border-black bg-[#ff8c00] flex items-center justify-center text-3xl">
+                🧙
+              </div>
+              <div>
+                <h3 className="text-xl font-bold font-pixel">Wizard</h3>
+                <p className="text-sm opacity-70">Level 12</p>
+              </div>
+            </div>
+            <div className="space-y-3">
+              <PixelHealthBar current={85} max={100} label="HP" />
+              <PixelManaBar current={60} max={100} label="MP" />
+              <PixelXPBar currentXP={350} requiredXP={500} level={12} showLevel={false} />
+            </div>
+          </div>
+
+          {/* Inventory Grid */}
+          <PixelInventory columns={5} title="Inventory">
+            <PixelInventorySlot item="⚔️" rarity="legendary" />
+            <PixelInventorySlot item="🛡️" rarity="epic" />
+            <PixelInventorySlot item="💊" count={5} rarity="common" />
+            <PixelInventorySlot item="🔮" rarity="rare" />
+            <PixelInventorySlot item="👑" rarity="legendary" />
+            <PixelInventorySlot isEmpty />
+            <PixelInventorySlot isEmpty />
+            <PixelInventorySlot isEmpty />
+            <PixelInventorySlot isEmpty />
+            <PixelInventorySlot isEmpty />
+          </PixelInventory>
+
+          {/* Achievement Notification */}
           <PixelAchievement
             variant="gold"
-            title="Master"
-            description="Defeat 100 enemies"
-            icon="🥇"
+            title="First Victory"
+            description="Complete your first quest"
+            icon="🏆"
             points={50}
           />
-          <PixelAchievement
-            variant="silver"
-            title="Experienced"
-            description="Reach level 25"
-            icon="🥈"
-            points={25}
-          />
+
+          {/* Damage Numbers */}
+          <div className="flex items-center justify-center gap-8 p-8 border-4 border-black bg-white dark:bg-[#2a2a2a] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
+            <PixelDamageNumber value={50} type="damage" animate={false} />
+            <PixelDamageNumber value={25} type="heal" animate={false} />
+            <PixelDamageNumber value={100} type="critical" animate={false} />
+          </div>
         </div>
       );
     
