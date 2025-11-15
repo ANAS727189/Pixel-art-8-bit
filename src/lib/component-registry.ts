@@ -413,6 +413,101 @@ toast({
     usageCode: `toast.success("Saved!")`,
     componentCode: `/src/components/ui/pixel-sonner.tsx`,
   },
+  {
+    slug: "pixel-warning-tooltip",
+    title: "Warning Tooltip",
+    description: "Shows warnings and alerts when hovering over elements with different severity levels.",
+    category: "Feedback",
+    installation: "npm install @radix-ui/react-tooltip lucide-react",
+    importCode: `import { PixelWarningTooltip, PixelWarningTooltipTrigger, PixelWarningTooltipContent, PixelWarningTooltipProvider } from "@/components/ui/pixel/pixel-warning-tooltip"`,
+    usageCode: `<PixelWarningTooltipProvider>
+  <PixelWarningTooltip>
+    <PixelWarningTooltipTrigger severity="warning">
+      Password
+    </PixelWarningTooltipTrigger>
+    <PixelWarningTooltipContent severity="warning">
+      Password strength: weak
+    </PixelWarningTooltipContent>
+  </PixelWarningTooltip>
+</PixelWarningTooltipProvider>`,
+    componentCode: `/src/components/ui/pixel/pixel-warning-tooltip.tsx`,
+    props: [
+      { name: "severity", type: '"warning" | "error" | "info" | "critical"', default: '"warning"', description: "Warning severity level" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Tooltip size" },
+      { name: "showIcon", type: "boolean", default: "true", description: "Show warning icon on trigger" },
+      { name: "showWarningIcon", type: "boolean", default: "true", description: "Show warning icon in tooltip content" },
+    ],
+    examples: [
+      {
+        title: "Password Strength Warning",
+        code: `<PixelWarningTooltipProvider>
+  <PixelWarningTooltip>
+    <PixelWarningTooltipTrigger severity="warning">
+      Password
+    </PixelWarningTooltipTrigger>
+    <PixelWarningTooltipContent severity="warning">
+      Password strength: weak
+    </PixelWarningTooltipContent>
+  </PixelWarningTooltip>
+</PixelWarningTooltipProvider>`,
+      },
+      {
+        title: "Different Severity Levels",
+        code: `<PixelWarningTooltipProvider>
+  <div className="flex gap-4">
+    <PixelWarningTooltip>
+      <PixelWarningTooltipTrigger severity="info">
+        Info
+      </PixelWarningTooltipTrigger>
+      <PixelWarningTooltipContent severity="info" size="sm">
+        This is informational
+      </PixelWarningTooltipContent>
+    </PixelWarningTooltip>
+
+    <PixelWarningTooltip>
+      <PixelWarningTooltipTrigger severity="warning">
+        Warning
+      </PixelWarningTooltipTrigger>
+      <PixelWarningTooltipContent severity="warning">
+        Please be careful
+      </PixelWarningTooltipContent>
+    </PixelWarningTooltip>
+
+    <PixelWarningTooltip>
+      <PixelWarningTooltipTrigger severity="error">
+        Error
+      </PixelWarningTooltipTrigger>
+      <PixelWarningTooltipContent severity="error">
+        Something went wrong
+      </PixelWarningTooltipContent>
+    </PixelWarningTooltip>
+
+    <PixelWarningTooltip>
+      <PixelWarningTooltipTrigger severity="critical">
+        Critical
+      </PixelWarningTooltipTrigger>
+      <PixelWarningTooltipContent severity="critical" size="lg">
+        Critical system error - immediate action required
+      </PixelWarningTooltipContent>
+    </PixelWarningTooltip>
+  </div>
+</PixelWarningTooltipProvider>`,
+      },
+      {
+        title: "Without Icons",
+        code: `<PixelWarningTooltipProvider>
+  <PixelWarningTooltip>
+    <PixelWarningTooltipTrigger severity="warning" showIcon={false}>
+      Hover for details
+    </PixelWarningTooltipTrigger>
+    <PixelWarningTooltipContent severity="warning" showWarningIcon={false}>
+      Clean tooltip without icons
+    </PixelWarningTooltipContent>
+  </PixelWarningTooltip>
+</PixelWarningTooltipProvider>`,
+      },
+    ],
+  },
 
   // Navigation
   {

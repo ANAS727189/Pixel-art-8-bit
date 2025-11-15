@@ -44,6 +44,7 @@ import { PixelCollapsible, PixelCollapsibleContent, PixelCollapsibleTrigger } fr
 import { PixelScrollArea } from "@/components/ui/pixel/pixel-scroll-area";
 import { PixelAspectRatio } from "@/components/ui/pixel/pixel-aspect-ratio";
 import { PixelHoverCard, PixelHoverCardContent, PixelHoverCardTrigger } from "@/components/ui/pixel/pixel-hover-card";
+import { PixelWarningTooltip, PixelWarningTooltipTrigger, PixelWarningTooltipContent, PixelWarningTooltipProvider } from "@/components/ui/pixel/pixel-warning-tooltip";
 
 // Import animation components
 import { PixelBlurText } from "@/components/ui/pixel/animations/pixel-blur-text";
@@ -351,6 +352,51 @@ export function ComponentPreview({ slug }: { slug: string }) {
     
     case "pixel-spinner":
       return <PixelSpinner />;
+    
+    case "pixel-warning-tooltip":
+      return (
+        <PixelWarningTooltipProvider>
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-4 flex-wrap">
+              <PixelWarningTooltip>
+                <PixelWarningTooltipTrigger severity="info">
+                  Info
+                </PixelWarningTooltipTrigger>
+                <PixelWarningTooltipContent severity="info" size="sm">
+                  This is informational
+                </PixelWarningTooltipContent>
+              </PixelWarningTooltip>
+
+              <PixelWarningTooltip>
+                <PixelWarningTooltipTrigger severity="warning">
+                  Password
+                </PixelWarningTooltipTrigger>
+                <PixelWarningTooltipContent severity="warning">
+                  Password strength: weak
+                </PixelWarningTooltipContent>
+              </PixelWarningTooltip>
+
+              <PixelWarningTooltip>
+                <PixelWarningTooltipTrigger severity="error">
+                  Error
+                </PixelWarningTooltipTrigger>
+                <PixelWarningTooltipContent severity="error">
+                  Something went wrong
+                </PixelWarningTooltipContent>
+              </PixelWarningTooltip>
+
+              <PixelWarningTooltip>
+                <PixelWarningTooltipTrigger severity="critical">
+                  Critical
+                </PixelWarningTooltipTrigger>
+                <PixelWarningTooltipContent severity="critical" size="lg">
+                  Critical system error - immediate action required
+                </PixelWarningTooltipContent>
+              </PixelWarningTooltip>
+            </div>
+          </div>
+        </PixelWarningTooltipProvider>
+      );
     
     case "pixel-breadcrumb":
       return (

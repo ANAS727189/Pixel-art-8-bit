@@ -12,6 +12,18 @@
   - Fully documented in component registry with usage examples
   - Live preview added to documentation page
 
+- **PixelWarningTooltip Component**
+  - Created warning tooltip component for feedback category
+  - Shows warnings and alerts when hovering over elements
+  - Four severity levels: info, warning, error, and critical
+  - Three size options: small, medium, and large
+  - Animated pulsing warning icon on trigger
+  - Optional icons in both trigger and content
+  - Built with Radix UI tooltip primitives
+  - Pixel-art styling with custom borders and shadows
+  - Fully documented with multiple usage examples
+  - Live interactive preview with all severity levels
+
 ### 🐛 Fixed
 
 - **Menubar Preview** 
@@ -62,8 +74,11 @@
 
 ### 📊 Summary
 
-**New Component:** PixelRating - Interactive star rating system  
+**New Components:** 
+- PixelRating - Interactive star rating system
+- PixelWarningTooltip - Warning and alert tooltips with severity levels
+
 **Fixed:** Menubar, Navigation Menu, Command, Drawer, Toast, and Sonner documentation previews  
 **Documentation:** Added complete usage examples for 4 components (Navigation Menu, Command, Alert Dialog, Drawer)  
-**Files Modified:** 2 files (component-preview.tsx, component-registry.ts)  
-**Impact:** Complete documentation coverage with all previews working and all usage code examples provided
+**Files Modified:** 4 files (pixel-warning-tooltip.tsx created, component-preview.tsx, component-registry.ts, CHANGELOG.md)  
+**Impact:** Complete documentation coverage with all previews working, new feedback component for user warnings
