@@ -64,6 +64,15 @@ export default function Portfolio() {
 
   const data = ${JSON.stringify(data, null, 2)};
 
+  // Helper function to ensure URLs have proper protocol
+  const normalizeUrl = (url: string | undefined): string => {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    return \`https://\${url}\`;
+  };
+
   const toggleProjectExpand = (index: number) => {
     const newExpanded = new Set(expandedProjects);
     if (newExpanded.has(index)) {
@@ -115,7 +124,7 @@ export default function Portfolio() {
               </a>
             )}
             {data.personalInfo.github && (
-              <a href={\`\${data.personalInfo.github}\`} target="_blank" rel="noopener noreferrer">
+              <a href={normalizeUrl(data.personalInfo.github)} target="_blank" rel="noopener noreferrer">
                 <PixelButton size="sm" variant="secondary">
                   <Github className="mr-2 h-4 w-4" />
                   GitHub
@@ -123,7 +132,7 @@ export default function Portfolio() {
               </a>
             )}
             {data.personalInfo.linkedin && (
-              <a href={\`\${data.personalInfo.linkedin}\`} target="_blank" rel="noopener noreferrer">
+              <a href={normalizeUrl(data.personalInfo.linkedin)} target="_blank" rel="noopener noreferrer">
                 <PixelButton size="sm" variant="secondary">
                   <Linkedin className="mr-2 h-4 w-4" />
                   LinkedIn
@@ -303,7 +312,7 @@ export default function Portfolio() {
                           )}
 
                           {(project.link || project.github) && (
-                            <a href={\`\${project.link || project.github}\`} target="_blank" rel="noopener noreferrer">
+                            <a href={normalizeUrl(project.link || project.github)} target="_blank" rel="noopener noreferrer">
                               <PixelButton variant="ghost" size="sm">
                                 View Project <ExternalLink className="ml-2 h-3 w-3" />
                               </PixelButton>
@@ -462,6 +471,15 @@ export default function Portfolio() {
                         data.projects?.length > 0 || 
                         data.education?.length > 0;
 
+  // Helper function to ensure URLs have proper protocol
+  const normalizeUrl = (url: string | undefined): string => {
+    if (!url) return '';
+    if (url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    return `https://${url}`;
+  };
+
   const toggleProjectExpand = (index: number) => {
     const newExpanded = new Set(expandedProjects);
     if (newExpanded.has(index)) {
@@ -550,7 +568,7 @@ export default function Portfolio() {
               </a>
             )}
             {data.personalInfo.github && (
-              <a href={data.personalInfo.github} target="_blank" rel="noopener noreferrer">
+              <a href={normalizeUrl(data.personalInfo.github)} target="_blank" rel="noopener noreferrer">
                 <PixelButton size="sm" variant="secondary" className="gap-2">
                   <Github className="h-4 w-4" />
                   <span className="font-pixel">GitHub</span>
@@ -558,7 +576,7 @@ export default function Portfolio() {
               </a>
             )}
             {data.personalInfo.linkedin && (
-              <a href={data.personalInfo.linkedin} target="_blank" rel="noopener noreferrer">
+              <a href={normalizeUrl(data.personalInfo.linkedin)} target="_blank" rel="noopener noreferrer">
                 <PixelButton size="sm" variant="secondary" className="gap-2">
                   <Linkedin className="h-4 w-4" />
                   <span className="font-pixel">LinkedIn</span>
@@ -790,7 +808,7 @@ export default function Portfolio() {
 
                           {(project.link || project.github) && (
                             <a
-                              href={project.link || project.github}
+                              href={normalizeUrl(project.link || project.github)}
                               target="_blank"
                               rel="noopener noreferrer"
                             >
@@ -936,7 +954,7 @@ export default function Portfolio() {
             )}
             {data.personalInfo.github && (
               <a 
-                href={data.personalInfo.github} 
+                href={normalizeUrl(data.personalInfo.github)} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="hover:text-pixel-warning dark:hover:text-pixel-dark-secondary transition-colors flex items-center gap-2 group"
@@ -947,7 +965,7 @@ export default function Portfolio() {
             )}
             {data.personalInfo.linkedin && (
               <a 
-                href={data.personalInfo.linkedin} 
+                href={normalizeUrl(data.personalInfo.linkedin)} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="hover:text-pixel-warning dark:hover:text-pixel-dark-secondary transition-colors flex items-center gap-2 group"
