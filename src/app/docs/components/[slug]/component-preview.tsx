@@ -31,6 +31,7 @@ import { PixelPopover, PixelPopoverContent, PixelPopoverTrigger } from "@/compon
 import { PixelTooltip, PixelTooltipContent, PixelTooltipProvider, PixelTooltipTrigger } from "@/components/ui/pixel/pixel-tooltip";
 import { PixelDropdownMenu, PixelDropdownMenuContent, PixelDropdownMenuItem, PixelDropdownMenuTrigger } from "@/components/ui/pixel/pixel-dropdown-menu";
 import { PixelContextMenu, PixelContextMenuContent, PixelContextMenuItem, PixelContextMenuTrigger } from "@/components/ui/pixel/pixel-context-menu";
+import { PixelMenubar, PixelMenubarMenu, PixelMenubarTrigger, PixelMenubarContent, PixelMenubarItem, PixelMenubarSeparator } from "@/components/ui/pixel/pixel-menubar";
 import { PixelSheet, PixelSheetContent, PixelSheetHeader, PixelSheetTitle, PixelSheetTrigger } from "@/components/ui/pixel/pixel-sheet";
 import { PixelSeparator } from "@/components/ui/pixel/pixel-separator";
 import { PixelCollapsible, PixelCollapsibleContent, PixelCollapsibleTrigger } from "@/components/ui/pixel/pixel-collapsible";
@@ -430,6 +431,41 @@ export function ComponentPreview({ slug }: { slug: string }) {
             <PixelContextMenuItem>Item 3</PixelContextMenuItem>
           </PixelContextMenuContent>
         </PixelContextMenu>
+      );
+    
+    case "pixel-menubar":
+      return (
+        <PixelMenubar>
+          <PixelMenubarMenu>
+            <PixelMenubarTrigger>File</PixelMenubarTrigger>
+            <PixelMenubarContent>
+              <PixelMenubarItem>New Tab</PixelMenubarItem>
+              <PixelMenubarItem>New Window</PixelMenubarItem>
+              <PixelMenubarSeparator />
+              <PixelMenubarItem>Save</PixelMenubarItem>
+              <PixelMenubarItem>Save As...</PixelMenubarItem>
+            </PixelMenubarContent>
+          </PixelMenubarMenu>
+          <PixelMenubarMenu>
+            <PixelMenubarTrigger>Edit</PixelMenubarTrigger>
+            <PixelMenubarContent>
+              <PixelMenubarItem>Cut</PixelMenubarItem>
+              <PixelMenubarItem>Copy</PixelMenubarItem>
+              <PixelMenubarItem>Paste</PixelMenubarItem>
+              <PixelMenubarSeparator />
+              <PixelMenubarItem>Select All</PixelMenubarItem>
+            </PixelMenubarContent>
+          </PixelMenubarMenu>
+          <PixelMenubarMenu>
+            <PixelMenubarTrigger>View</PixelMenubarTrigger>
+            <PixelMenubarContent>
+              <PixelMenubarItem>Zoom In</PixelMenubarItem>
+              <PixelMenubarItem>Zoom Out</PixelMenubarItem>
+              <PixelMenubarSeparator />
+              <PixelMenubarItem>Full Screen</PixelMenubarItem>
+            </PixelMenubarContent>
+          </PixelMenubarMenu>
+        </PixelMenubar>
       );
     
     case "pixel-sheet":
