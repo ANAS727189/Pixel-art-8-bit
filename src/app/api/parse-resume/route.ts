@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     const data = await pdf(buffer);
+    console.log('Extracted Text:', data);
     
     // Parse the resume text to extract structured data
     const resumeData = parseResume(data.text);
@@ -32,6 +33,8 @@ export async function POST(request: NextRequest) {
     const fullData = { ...resumeData, id };
     resumeStore.set(id, fullData);
     
+    console.log('Parsed Resume Data:', fullData);
+
     return NextResponse.json({
       success: true,
       id,
