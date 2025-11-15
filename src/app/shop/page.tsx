@@ -3,7 +3,9 @@
 import { PixelButton } from "@/components/ui/pixel/pixel-button";
 import { PixelCard, PixelCardContent, PixelCardFooter, PixelCardHeader, PixelCardTitle } from "@/components/ui/pixel/pixel-card";
 import { PixelBadge } from "@/components/ui/pixel/pixel-badge";
-import { ShoppingCart, Heart, Trash2, Plus, Minus, Star } from "lucide-react";
+import { PixelInput } from "@/components/ui/pixel/pixel-input";
+import { PixelSelect, PixelSelectContent, PixelSelectItem, PixelSelectTrigger, PixelSelectValue } from "@/components/ui/pixel/pixel-select";
+import { ShoppingCart, Heart, Trash2, Plus, Minus, Star, Search, X, SlidersHorizontal } from "lucide-react";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { 
   addToCart, 
@@ -16,7 +18,21 @@ import {
   clearCart,
   type Product 
 } from "@/store/slices/shoppingCartSlice";
+import {
+  setSearchTerm,
+  toggleCategory,
+  setPriceRange,
+  setSortBy,
+  resetFilters,
+  type SortOption,
+} from "@/store/slices/filterSlice";
+import {
+  selectFilteredProducts,
+  selectAvailableCategories,
+  selectPriceStats,
+} from "@/store/selectors/productSelectors";
 import Link from "next/link";
+import { useState } from "react";
 
 // Sample products for demo
 const sampleProducts: Product[] = [
@@ -67,14 +83,34 @@ const sampleProducts: Product[] = [
 export default function ShopPage() {
   const dispatch = useAppDispatch();
   const { items: cartItems, wishlist, total, itemCount } = useAppSelector((state) => state.shoppingCart);
+  const { searchTerm, selectedCategories, priceRange, sortBy } = useAppSelector((state) => state.filter);
+  
+  // Use memoized selector for filtered products
+  const filteredProducts = useAppSelector((state) => selectFilteredProducts(state, sampleProducts));
+  const availableCategories = useAppSelector((state) => selectAvailableCategories(state, sampleProducts));
+  const priceStats = useAppSelector((state) => selectPriceStats(state, sampleProducts));
+
+  const [showFilters, setShowFilters] = useState(true);
+  const [minPrice, setMinPrice] = useState(priceRange.min);
+  const [maxPrice, setMaxPrice] = useState(priceRange.max);
+
+  const handlePriceRangeChange = () => {
+    dispatch(setPriceRange({ min: minPrice, max: maxPrice }));
+  };
+
+  const activeFiltersCount = 
+    (searchTerm ? 1 : 0) + 
+    selectedCategories.length + 
+    (priceRange.min !== 0 || priceRange.max !== 1000 ? 1 : 0) +
+    (sortBy !== "none" ? 1 : 0);
 
   return (
-    <div className="min-h-screen bg-[#f5f5dc] dark:bg-[#000000] p-8">
+    <div className="min-h-screen bg-pixel-light-bg dark:bg-black p-8">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <header className="mb-8">
           <div className="flex items-center justify-between mb-6">
-            <h1 className="text-4xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] dark:text-[#ffd700]">
+            <h1 className="text-4xl font-bold uppercase tracking-wider font-pixel dark:text-pixel-dark-secondary">
               Pixel Shop
             </h1>
             <div className="flex gap-4">
@@ -94,14 +130,189 @@ export default function ShopPage() {
           </div>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+          {/* Filters Sidebar */}
+          <aside className="lg:col-span-1">
+            <PixelCard>
+              <PixelCardHeader>
+                <div className="flex items-center justify-between">
+                  <PixelCardTitle className="flex items-center gap-2">
+                    <SlidersHorizontal className="h-5 w-5" />
+                    Filters
+                    {activeFiltersCount > 0 && (
+                      <PixelBadge variant="default" className="ml-2">
+                        {activeFiltersCount}
+                      </PixelBadge>
+                    )}
+                  </PixelCardTitle>
+                  <PixelButton
+                    size="sm"
+                    variant="ghost"
+                    onClick={() => setShowFilters(!showFilters)}
+                  >
+                    {showFilters ? "Hide" : "Show"}
+                  </PixelButton>
+                </div>
+              </PixelCardHeader>
+
+              {showFilters && (
+                <PixelCardContent className="space-y-6">
+                  {/* Search */}
+                  <div>
+                    <label className="text-sm font-bold mb-2 block">Search</label>
+                    <div className="relative">
+                      <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                      <PixelInput
+                        type="text"
+                        placeholder="Search products..."
+                        value={searchTerm}
+                        onChange={(e) => dispatch(setSearchTerm(e.target.value))}
+                        className="pl-10"
+                      />
+                      {searchTerm && (
+                        <button
+                          onClick={() => dispatch(setSearchTerm(""))}
+                          className="absolute right-3 top-1/2 -translate-y-1/2"
+                          aria-label="Clear search"
+                          title="Clear search"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Categories */}
+                  <div>
+                    <label className="text-sm font-bold mb-2 block">Categories</label>
+                    <div className="space-y-2">
+                      {availableCategories.map((category) => (
+                        <label
+                          key={category}
+                          className="flex items-center gap-2 cursor-pointer hover:bg-muted p-2 rounded"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={selectedCategories.includes(category)}
+                            onChange={() => dispatch(toggleCategory(category))}
+                            className="w-4 h-4 cursor-pointer"
+                          />
+                          <span className="text-sm">{category}</span>
+                          <span className="text-xs text-muted-foreground ml-auto">
+                            ({sampleProducts.filter((p) => p.category === category).length})
+                          </span>
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Price Range */}
+                  <div>
+                    <label className="text-sm font-bold mb-2 block">Price Range</label>
+                    <div className="space-y-3">
+                      <div className="flex gap-2 items-center">
+                        <PixelInput
+                          type="number"
+                          placeholder="Min"
+                          value={minPrice}
+                          onChange={(e) => setMinPrice(Number(e.target.value))}
+                          className="w-full"
+                        />
+                        <span>-</span>
+                        <PixelInput
+                          type="number"
+                          placeholder="Max"
+                          value={maxPrice}
+                          onChange={(e) => setMaxPrice(Number(e.target.value))}
+                          className="w-full"
+                        />
+                      </div>
+                      <PixelButton
+                        size="sm"
+                        onClick={handlePriceRangeChange}
+                        className="w-full"
+                      >
+                        Apply
+                      </PixelButton>
+                      <p className="text-xs text-muted-foreground">
+                        Range: ${priceStats.min} - ${priceStats.max}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Sort By */}
+                  <div>
+                    <label className="text-sm font-bold mb-2 block">Sort By</label>
+                    <PixelSelect
+                      value={sortBy}
+                      onValueChange={(value) => dispatch(setSortBy(value as SortOption))}
+                    >
+                      <PixelSelectTrigger>
+                        <PixelSelectValue placeholder="Select sort order" />
+                      </PixelSelectTrigger>
+                      <PixelSelectContent>
+                        <PixelSelectItem value="none">Default</PixelSelectItem>
+                        <PixelSelectItem value="price-asc">Price: Low to High</PixelSelectItem>
+                        <PixelSelectItem value="price-desc">Price: High to Low</PixelSelectItem>
+                        <PixelSelectItem value="name-asc">Name: A to Z</PixelSelectItem>
+                        <PixelSelectItem value="name-desc">Name: Z to A</PixelSelectItem>
+                      </PixelSelectContent>
+                    </PixelSelect>
+                  </div>
+
+                  {/* Reset Filters */}
+                  {activeFiltersCount > 0 && (
+                    <PixelButton
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => {
+                        dispatch(resetFilters());
+                        setMinPrice(0);
+                        setMaxPrice(1000);
+                      }}
+                      className="w-full"
+                    >
+                      Reset All Filters
+                    </PixelButton>
+                  )}
+                </PixelCardContent>
+              )}
+            </PixelCard>
+          </aside>
+
           {/* Products Section */}
           <section className="lg:col-span-2">
-            <h2 className="text-2xl font-bold uppercase tracking-wider mb-6 dark:text-[#ffd700]">
-              Available Items
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {sampleProducts.map((product) => {
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold uppercase tracking-wider dark:text-pixel-dark-secondary">
+                Available Items
+              </h2>
+              <PixelBadge variant="default">
+                {filteredProducts.length} of {sampleProducts.length} products
+              </PixelBadge>
+            </div>
+
+            {filteredProducts.length === 0 ? (
+              <PixelCard>
+                <PixelCardContent className="text-center py-12">
+                  <p className="text-muted-foreground text-lg mb-4">No products found</p>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Try adjusting your filters or search terms
+                  </p>
+                  <PixelButton
+                    variant="secondary"
+                    onClick={() => {
+                      dispatch(resetFilters());
+                      setMinPrice(0);
+                      setMaxPrice(1000);
+                    }}
+                  >
+                    Clear All Filters
+                  </PixelButton>
+                </PixelCardContent>
+              </PixelCard>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {filteredProducts.map((product) => {
                 const inCart = cartItems.find((item) => item.id === product.id);
                 const inWishlist = wishlist.find((item) => item.id === product.id);
 
@@ -119,6 +330,8 @@ export default function ShopPage() {
                             }
                           }}
                           className="hover:scale-110 transition-transform"
+                          aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
+                          title={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
                         >
                           <Heart
                             className={`h-5 w-5 ${
@@ -132,7 +345,7 @@ export default function ShopPage() {
                       <div className="text-6xl text-center my-4">{product.image}</div>
                       <div className="flex items-center justify-between">
                         <PixelBadge variant="default">{product.category}</PixelBadge>
-                        <span className="text-xl font-bold dark:text-[#ffd700]">
+                        <span className="text-xl font-bold dark:text-pixel-dark-secondary">
                           ${product.price}
                         </span>
                       </div>
@@ -178,6 +391,7 @@ export default function ShopPage() {
                 );
               })}
             </div>
+            )}
           </section>
 
           {/* Cart & Wishlist Sidebar */}
@@ -216,7 +430,7 @@ export default function ShopPage() {
                             {item.quantity} × ${item.price}
                           </p>
                         </div>
-                        <p className="font-bold dark:text-[#ffd700]">
+                        <p className="font-bold dark:text-pixel-dark-secondary">
                           ${(item.quantity * item.price).toFixed(2)}
                         </p>
                       </div>
@@ -224,7 +438,7 @@ export default function ShopPage() {
                     <div className="pt-4 border-t-4 border-black dark:border-[#ff8c00]">
                       <div className="flex justify-between items-center text-xl font-bold">
                         <span>Total:</span>
-                        <span className="dark:text-[#ffd700]">${total.toFixed(2)}</span>
+                        <span className="dark:text-pixel-dark-secondary">${total.toFixed(2)}</span>
                       </div>
                     </div>
                   </div>

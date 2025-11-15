@@ -4,6 +4,7 @@ import componentPlaygroundReducer from './slices/componentPlaygroundSlice'
 import shoppingCartReducer from './slices/shoppingCartSlice'
 import toastReducer from './slices/toastSlice'
 import uiReducer from './slices/uiSlice'
+import filterReducer from './slices/filterSlice'
 
 export const makeStore = () => {
   return configureStore({
@@ -13,6 +14,7 @@ export const makeStore = () => {
       shoppingCart: shoppingCartReducer,
       toast: toastReducer,
       ui: uiReducer,
+      filter: filterReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({

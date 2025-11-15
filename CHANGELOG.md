@@ -55,6 +55,26 @@
   - Fully documented with usage examples for all variants
   - Live interactive preview showing all 5 status types
 
+- **Redux Product Filters & Search System**
+  - Created comprehensive filtering system for Pixel Shop
+  - Real-time product search by name (case-insensitive)
+  - Multi-select category filter with checkboxes
+  - Price range filter with min/max inputs
+  - Five sort options (default, price asc/desc, name asc/desc)
+  - Active filters counter badge
+  - Reset all filters functionality
+  - Empty state with helpful messaging
+  - Results counter showing filtered vs total products
+  - New Redux slice: `filterSlice` with 9 actions
+  - Memoized selectors using Reselect for optimized performance
+  - Three selectors: filtered products, available categories, price stats
+  - Filters sidebar with collapsible UI
+  - Clear buttons for search and individual filters
+  - Dynamic category list with product counts
+  - Files created: `filterSlice.ts`, `productSelectors.ts`
+  - Updated Redux store configuration
+  - Full documentation in `REDUX-FILTERS-GUIDE.md`
+
 ### 🐛 Fixed
 
 - **Menubar Preview** 
@@ -102,6 +122,14 @@
   - Added complete usage code for PixelDrawer component
   - Added complete usage code for PixelUndoChip component
 
+- **Redux Filters Documentation**
+  - Created comprehensive guide: `REDUX-FILTERS-GUIDE.md`
+  - Documented filter slice state structure
+  - Listed all 9 filter actions with examples
+  - Explained memoized selectors and Reselect usage
+  - Provided usage examples and testing guide
+  - Outlined future enhancement ideas
+
 ### 📊 Summary
 
 **New Components:** 
@@ -110,7 +138,10 @@
 - PixelUndoChip - Undo chip/snackbar for action confirmation with undo option
 - PixelAIBubble - AI assistant status indicators with thinking, typing, and ready states
 
-**Fixed:** Menubar, Navigation Menu, Command, Drawer, Toast, and Sonner documentation previews  
-**Documentation:** Added complete usage examples for 4 components (Navigation Menu, Command, Alert Dialog, Drawer)  
-**Files Modified:** 7 files (pixel-warning-tooltip.tsx, pixel-undo-chip.tsx, pixel-ai-bubble.tsx created, component-preview.tsx, component-registry.ts, CHANGELOG.md)  
-**Impact:** Complete documentation coverage, three new feedback components for better user experience with warnings, low-friction action confirmations, and AI assistant status indicators
+**New Redux Features:**
+- Product Filters & Search System - Complete filtering with search, categories, price range, and sorting
+
+**Fixed:** Menubar, Navigation Menu, Command, Drawer, Toast, Sonner documentation previews + Pixel Shop accessibility and theme consistency  
+**Documentation:** Added complete usage examples for 5 components + comprehensive Redux filters guide  
+**Files Modified:** 12 files (3 feedback components, filterSlice.ts, productSelectors.ts, store.ts, shop page, REDUX-FILTERS-GUIDE.md, CHANGELOG.md)  
+**Impact:** Complete documentation coverage, three new feedback components, advanced Redux filtering system showcasing memoized selectors and state management best practices
