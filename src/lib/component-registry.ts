@@ -499,7 +499,32 @@ toast({
     category: "Navigation",
     installation: "npm install @radix-ui/react-navigation-menu",
     importCode: `import { PixelNavigationMenu, PixelNavigationMenuList, PixelNavigationMenuItem, PixelNavigationMenuTrigger, PixelNavigationMenuContent, PixelNavigationMenuLink } from "@/components/ui/pixel-navigation-menu"`,
-    usageCode: `// See examples`,
+    usageCode: `<PixelNavigationMenu>
+  <PixelNavigationMenuList>
+    <PixelNavigationMenuItem>
+      <PixelNavigationMenuTrigger>Products</PixelNavigationMenuTrigger>
+      <PixelNavigationMenuContent>
+        <ul className="grid gap-3 p-4 w-[400px]">
+          <li>
+            <PixelNavigationMenuLink href="/products/1">
+              Product One
+            </PixelNavigationMenuLink>
+          </li>
+          <li>
+            <PixelNavigationMenuLink href="/products/2">
+              Product Two
+            </PixelNavigationMenuLink>
+          </li>
+        </ul>
+      </PixelNavigationMenuContent>
+    </PixelNavigationMenuItem>
+    <PixelNavigationMenuItem>
+      <PixelNavigationMenuLink href="/about">
+        About
+      </PixelNavigationMenuLink>
+    </PixelNavigationMenuItem>
+  </PixelNavigationMenuList>
+</PixelNavigationMenu>`,
     componentCode: `/src/components/ui/pixel-navigation-menu.tsx`,
   },
   {
@@ -509,7 +534,17 @@ toast({
     category: "Navigation",
     installation: "npm install cmdk",
     importCode: `import { PixelCommand, PixelCommandInput, PixelCommandList, PixelCommandEmpty, PixelCommandGroup, PixelCommandItem } from "@/components/ui/pixel-command"`,
-    usageCode: `// See examples`,
+    usageCode: `<PixelCommand>
+  <PixelCommandInput placeholder="Type a command or search..." />
+  <PixelCommandList>
+    <PixelCommandEmpty>No results found.</PixelCommandEmpty>
+    <PixelCommandGroup heading="Suggestions">
+      <PixelCommandItem>Calendar</PixelCommandItem>
+      <PixelCommandItem>Search Emoji</PixelCommandItem>
+      <PixelCommandItem>Calculator</PixelCommandItem>
+    </PixelCommandGroup>
+  </PixelCommandList>
+</PixelCommand>`,
     componentCode: `/src/components/ui/pixel-command.tsx`,
   },
 

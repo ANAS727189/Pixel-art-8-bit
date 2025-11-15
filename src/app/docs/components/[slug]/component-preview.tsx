@@ -32,6 +32,8 @@ import { PixelTooltip, PixelTooltipContent, PixelTooltipProvider, PixelTooltipTr
 import { PixelDropdownMenu, PixelDropdownMenuContent, PixelDropdownMenuItem, PixelDropdownMenuTrigger } from "@/components/ui/pixel/pixel-dropdown-menu";
 import { PixelContextMenu, PixelContextMenuContent, PixelContextMenuItem, PixelContextMenuTrigger } from "@/components/ui/pixel/pixel-context-menu";
 import { PixelMenubar, PixelMenubarMenu, PixelMenubarTrigger, PixelMenubarContent, PixelMenubarItem, PixelMenubarSeparator } from "@/components/ui/pixel/pixel-menubar";
+import { PixelNavigationMenu, PixelNavigationMenuList, PixelNavigationMenuItem, PixelNavigationMenuTrigger, PixelNavigationMenuContent, PixelNavigationMenuLink } from "@/components/ui/pixel/pixel-navigation-menu";
+import { PixelCommand, PixelCommandInput, PixelCommandList, PixelCommandEmpty, PixelCommandGroup, PixelCommandItem } from "@/components/ui/pixel/pixel-command";
 import { PixelSheet, PixelSheetContent, PixelSheetHeader, PixelSheetTitle, PixelSheetTrigger } from "@/components/ui/pixel/pixel-sheet";
 import { PixelSeparator } from "@/components/ui/pixel/pixel-separator";
 import { PixelCollapsible, PixelCollapsibleContent, PixelCollapsibleTrigger } from "@/components/ui/pixel/pixel-collapsible";
@@ -466,6 +468,41 @@ export function ComponentPreview({ slug }: { slug: string }) {
             </PixelMenubarContent>
           </PixelMenubarMenu>
         </PixelMenubar>
+      );
+    
+    case "pixel-navigation-menu":
+      return (
+        <PixelNavigationMenu>
+          <PixelNavigationMenuList>
+            <PixelNavigationMenuItem>
+              <PixelNavigationMenuTrigger>Menu</PixelNavigationMenuTrigger>
+              <PixelNavigationMenuContent>
+                <ul className="grid gap-3 p-4 w-[300px]">
+                  <li><PixelNavigationMenuLink href="#" className="block p-2">Item 1</PixelNavigationMenuLink></li>
+                  <li><PixelNavigationMenuLink href="#" className="block p-2">Item 2</PixelNavigationMenuLink></li>
+                </ul>
+              </PixelNavigationMenuContent>
+            </PixelNavigationMenuItem>
+            <PixelNavigationMenuItem>
+              <PixelNavigationMenuLink href="#">Link</PixelNavigationMenuLink>
+            </PixelNavigationMenuItem>
+          </PixelNavigationMenuList>
+        </PixelNavigationMenu>
+      );
+    
+    case "pixel-command":
+      return (
+        <PixelCommand className="max-w-md">
+          <PixelCommandInput placeholder="Search..." />
+          <PixelCommandList>
+            <PixelCommandEmpty>No results.</PixelCommandEmpty>
+            <PixelCommandGroup heading="Items">
+              <PixelCommandItem>Item 1</PixelCommandItem>
+              <PixelCommandItem>Item 2</PixelCommandItem>
+              <PixelCommandItem>Item 3</PixelCommandItem>
+            </PixelCommandGroup>
+          </PixelCommandList>
+        </PixelCommand>
       );
     
     case "pixel-sheet":
