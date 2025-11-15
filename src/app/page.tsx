@@ -84,23 +84,66 @@ export default function HomePage() {
             <PixelCardHeader className="text-center pb-4">
               <div className="flex justify-center mb-3">
                 <PixelBadge variant="warning" className="text-lg px-4 py-2">
-                  ✨ NEW
+                  ✨ NEW FEATURE
                 </PixelBadge>
               </div>
               <PixelCardTitle className="text-3xl md:text-4xl mb-3">
                 <FileText className="inline h-10 w-10 mr-3" />
-                Resume to Portfolio
+                Resume to Portfolio Maker
               </PixelCardTitle>
-              <PixelCardDescription className="text-base md:text-lg">
+              <PixelCardDescription className="text-base md:text-lg max-w-3xl mx-auto">
                 Transform your resume PDF into a stunning pixel-perfect portfolio website instantly! Upload your resume and get a fully styled, retro-themed portfolio with all your experience, skills, projects, and education beautifully displayed.
               </PixelCardDescription>
             </PixelCardHeader>
-            <PixelCardFooter className="flex justify-center pt-2 gap-4">
+            <PixelCardContent className="space-y-6">
+              {/* Features Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                <div className="text-center p-4 bg-pixel-light-bg dark:bg-pixel-dark-bg/50 border-2 border-black dark:border-pixel-dark-primary">
+                  <div className="text-3xl mb-2">📄</div>
+                  <h3 className="font-bold mb-1 font-pixel text-sm">PDF Upload</h3>
+                  <p className="text-xs">Upload your resume PDF and we'll extract all the data</p>
+                </div>
+                <div className="text-center p-4 bg-pixel-light-bg dark:bg-pixel-dark-bg/50 border-2 border-black dark:border-pixel-dark-primary">
+                  <div className="text-3xl mb-2">✨</div>
+                  <h3 className="font-bold mb-1 font-pixel text-sm">Instant Generation</h3>
+                  <p className="text-xs">Get a beautiful portfolio in seconds with pixel-perfect design</p>
+                </div>
+                <div className="text-center p-4 bg-pixel-light-bg dark:bg-pixel-dark-bg/50 border-2 border-black dark:border-pixel-dark-primary">
+                  <div className="text-3xl mb-2">💾</div>
+                  <h3 className="font-bold mb-1 font-pixel text-sm">Download Code</h3>
+                  <p className="text-xs">Get the complete TSX code ready to use in your project</p>
+                </div>
+              </div>
+
+              {/* What We Extract */}
+              <div className="mt-6 p-4 bg-white dark:bg-pixel-dark-surface border-2 border-black dark:border-pixel-dark-primary">
+                <h3 className="font-bold mb-4 text-center font-pixel">📋 What We Extract From Your Resume</h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {[
+                    "Contact Information",
+                    "Skills & Technologies",
+                    "Work Experience",
+                    "Projects & Links",
+                    "Education Details",
+                    "Social Profiles"
+                  ].map((item, index) => (
+                    <div key={index} className="flex items-center gap-2 text-sm">
+                      <span className="text-green-500">✓</span>
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </PixelCardContent>
+            <PixelCardFooter className="flex flex-col sm:flex-row justify-center pt-4 gap-4">
               <Link href="/resume" aria-label="Try the Resume to Portfolio converter">
-                <PixelButton size="lg" className="group">
-                  Try It Now <ArrowRight className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                <PixelButton size="lg" className="group w-full sm:w-auto">
+                  Create Your Portfolio <ArrowRight className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                 </PixelButton>
               </Link>
+              <PixelBadge variant="default" className="text-xs px-4 py-2">
+                🔒 Your data is secure & never stored
+              </PixelBadge>
             </PixelCardFooter>
           </PixelCard>
         </div>

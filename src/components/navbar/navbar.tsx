@@ -34,6 +34,11 @@ export function Navbar() {
                 Patterns
               </PixelButton>
             </Link>
+            <Link href="/resume">
+              <PixelButton variant="default" size="sm">
+                Portfolio Maker
+              </PixelButton>
+            </Link>
           </div>
 
           {/* Social Links & Theme Toggle */}
