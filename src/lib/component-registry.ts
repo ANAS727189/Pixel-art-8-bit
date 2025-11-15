@@ -618,6 +618,68 @@ function YourComponent() {
       },
     ],
   },
+  {
+    slug: "pixel-ai-bubble",
+    title: "AI Bubble",
+    description: "AI assistant feedback bubbles showing thinking, typing, and status messages. Seen in AI products like ChatGPT and Claude.",
+    category: "Feedback",
+    installation: "npm install lucide-react",
+    importCode: `import { PixelAIBubble } from "@/components/ui/pixel/pixel-ai-bubble"`,
+    usageCode: `<PixelAIBubble variant="thinking" />
+<PixelAIBubble variant="ready" message="Answer ready!" />
+<PixelAIBubble variant="typing" animate={true} />`,
+    componentCode: `/src/components/ui/pixel/pixel-ai-bubble.tsx`,
+    props: [
+      { name: "variant", type: '"thinking" | "ready" | "processing" | "error" | "typing"', default: '"thinking"', description: "AI status variant" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Bubble size" },
+      { name: "message", type: "string", description: "Custom message (uses default if not provided)" },
+      { name: "showIcon", type: "boolean", default: "true", description: "Show status icon" },
+      { name: "animate", type: "boolean", default: "true", description: "Enable animations" },
+    ],
+    examples: [
+      {
+        title: "AI Thinking State",
+        code: `<PixelAIBubble variant="thinking" message="I'm thinking..." />`,
+      },
+      {
+        title: "Answer Ready",
+        code: `<PixelAIBubble variant="ready" message="Answer ready!" size="lg" />`,
+      },
+      {
+        title: "Typing Indicator",
+        code: `<PixelAIBubble variant="typing" animate={true} />`,
+      },
+      {
+        title: "All Status Types",
+        code: `<div className="flex flex-col gap-4">
+  <PixelAIBubble variant="thinking" />
+  <PixelAIBubble variant="typing" animate={true} />
+  <PixelAIBubble variant="processing" message="Analyzing your request..." />
+  <PixelAIBubble variant="ready" message="Answer ready!" />
+  <PixelAIBubble variant="error" message="Failed to generate response" />
+</div>`,
+      },
+      {
+        title: "Custom Messages",
+        code: `<div className="flex flex-col gap-4">
+  <PixelAIBubble 
+    variant="thinking" 
+    message="Searching knowledge base..." 
+    size="md"
+  />
+  <PixelAIBubble 
+    variant="processing" 
+    message="Generating response..." 
+    animate={true}
+  />
+  <PixelAIBubble 
+    variant="ready" 
+    message="Done! Check your answer below."
+  />
+</div>`,
+      },
+    ],
+  },
 
   // Navigation
   {

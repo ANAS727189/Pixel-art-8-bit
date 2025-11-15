@@ -46,6 +46,7 @@ import { PixelAspectRatio } from "@/components/ui/pixel/pixel-aspect-ratio";
 import { PixelHoverCard, PixelHoverCardContent, PixelHoverCardTrigger } from "@/components/ui/pixel/pixel-hover-card";
 import { PixelWarningTooltip, PixelWarningTooltipTrigger, PixelWarningTooltipContent, PixelWarningTooltipProvider } from "@/components/ui/pixel/pixel-warning-tooltip";
 import { PixelUndoChipProvider, usePixelUndoChip } from "@/components/ui/pixel/pixel-undo-chip";
+import { PixelAIBubble } from "@/components/ui/pixel/pixel-ai-bubble";
 
 // Import animation components
 import { PixelBlurText } from "@/components/ui/pixel/animations/pixel-blur-text";
@@ -448,6 +449,17 @@ export function ComponentPreview({ slug }: { slug: string }) {
     
     case "pixel-undo-chip":
       return <UndoChipDemoWrapper />;
+    
+    case "pixel-ai-bubble":
+      return (
+        <div className="flex flex-col gap-4">
+          <PixelAIBubble variant="thinking" message="I'm thinking..." />
+          <PixelAIBubble variant="typing" animate={true} />
+          <PixelAIBubble variant="processing" message="Analyzing your request..." />
+          <PixelAIBubble variant="ready" message="Answer ready!" />
+          <PixelAIBubble variant="error" message="Failed to generate response" />
+        </div>
+      );
     
     case "pixel-breadcrumb":
       return (
