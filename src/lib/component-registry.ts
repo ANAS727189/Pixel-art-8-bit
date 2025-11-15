@@ -1188,7 +1188,8 @@ toast({
   PixelCtaDescription,
   PixelCtaActions,
   PixelCtaPattern,
-  PixelCtaBadge
+  PixelCtaBadge,
+  PixelCtaHighlight
 } from "@/components/ui/pixel/pixel-cta"`,
     usageCode: `<PixelCta variant="primary" size="md">
   <PixelCtaContent>
@@ -1295,9 +1296,9 @@ toast({
     props: [
       {
         name: "variant",
-        type: '"default" | "primary" | "secondary" | "dark" | "gradient"',
+        type: '"default" | "primary" | "secondary" | "dark" | "gradient" | "success" | "accent" | "purple"',
         default: '"primary"',
-        description: "Visual style variant of the CTA section",
+        description: "Visual style variant of the CTA section - now with colorful options",
       },
       {
         name: "size",

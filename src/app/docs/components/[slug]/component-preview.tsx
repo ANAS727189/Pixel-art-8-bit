@@ -39,7 +39,7 @@ import { PixelHoverCard, PixelHoverCardContent, PixelHoverCardTrigger } from "@/
 import { PixelHero, PixelHeroContent, PixelHeroTitle, PixelHeroSubtitle, PixelHeroDescription, PixelHeroActions, PixelHeroBadge } from "@/components/ui/pixel/pixel-hero";
 import { PixelBentoGrid, PixelBentoItem, PixelBentoHeader, PixelBentoTitle, PixelBentoDescription, PixelBentoIcon, PixelBentoContent } from "@/components/ui/pixel/pixel-bento";
 import { PixelFeatures, PixelFeatureItem, PixelFeatureIcon, PixelFeatureTitle, PixelFeatureDescription } from "@/components/ui/pixel/pixel-features";
-import { PixelCta, PixelCtaContent, PixelCtaTitle, PixelCtaDescription, PixelCtaActions } from "@/components/ui/pixel/pixel-cta";
+import { PixelCta, PixelCtaContent, PixelCtaTitle, PixelCtaDescription, PixelCtaActions, PixelCtaHighlight } from "@/components/ui/pixel/pixel-cta";
 
 // Import animation components
 import { PixelBlurText } from "@/components/ui/pixel/animations/pixel-blur-text";

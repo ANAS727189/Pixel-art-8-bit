@@ -68,14 +68,14 @@ export default function FeaturesExamplesPage() {
             </PixelFeatureItem>
             <PixelFeatureItem hover="lift">
               <PixelFeatureIcon>🎨</PixelFeatureIcon>
-              <PixelFeatureTitle>Pixel Perfect</PixelFeatureTitle>
+              <PixelFeatureTitle>Modern Design</PixelFeatureTitle>
               <PixelFeatureDescription>
                 Retro 8-bit aesthetic with modern design principles
               </PixelFeatureDescription>
             </PixelFeatureItem>
             <PixelFeatureItem hover="lift">
               <PixelFeatureIcon>🔧</PixelFeatureIcon>
-              <PixelFeatureTitle>Customizable</PixelFeatureTitle>
+              <PixelFeatureTitle>Flexible</PixelFeatureTitle>
               <PixelFeatureDescription>
                 Fully themeable components with variant support
               </PixelFeatureDescription>

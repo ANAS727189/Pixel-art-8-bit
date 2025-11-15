@@ -8,10 +8,13 @@ const pixelCtaVariants = cva(
     variants: {
       variant: {
         default: "bg-white dark:bg-[#2a2a2a] shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
-        primary: "bg-[#ff8c00] text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
+        primary: "bg-[#4a90e2] text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
         secondary: "bg-[#ffd700] text-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
-        dark: "bg-black text-white border-[#ff8c00] shadow-[8px_8px_0px_0px_rgba(255,140,0,0.5)]",
-        gradient: "bg-gradient-to-br from-[#ff8c00] to-[#ffd700] text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
+        dark: "bg-black text-white border-[#4a90e2] shadow-[8px_8px_0px_0px_rgba(74,144,226,0.5)]",
+        gradient: "bg-gradient-to-br from-[#4a90e2] to-[#7b68ee] text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
+        success: "bg-[#50c878] text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
+        accent: "bg-[#ff6b9d] text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
+        purple: "bg-[#9b59b6] text-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]",
       },
       size: {
         sm: "py-12 md:py-16",
@@ -155,7 +158,7 @@ const PixelCtaBadge = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "inline-block px-4 py-2 mb-6 text-xs md:text-sm font-bold uppercase tracking-wider border-2 border-black bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
+      "inline-block px-4 py-2 mb-6 text-xs md:text-sm font-bold uppercase tracking-wider border-2 border-black bg-white text-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] font-[family-name:var(--font-pixel)]",
       className
     )}
     {...props}
@@ -165,6 +168,23 @@ const PixelCtaBadge = React.forwardRef<
 ));
 PixelCtaBadge.displayName = "PixelCtaBadge";
 
+const PixelCtaHighlight = React.forwardRef<
+  HTMLSpanElement,
+  React.HTMLAttributes<HTMLSpanElement>
+>(({ className, children, ...props }, ref) => (
+  <span
+    ref={ref}
+    className={cn(
+      "inline-block px-2 py-1 mx-1 bg-white text-black border-2 border-black",
+      className
+    )}
+    {...props}
+  >
+    {children}
+  </span>
+));
+PixelCtaHighlight.displayName = "PixelCtaHighlight";
+
 export {
   PixelCta,
   PixelCtaContent,
@@ -173,6 +193,7 @@ export {
   PixelCtaActions,
   PixelCtaPattern,
   PixelCtaBadge,
+  PixelCtaHighlight,
   pixelCtaVariants,
   pixelCtaPatternVariants,
 };

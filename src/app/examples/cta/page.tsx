@@ -11,6 +11,7 @@ import {
   PixelCtaActions,
   PixelCtaPattern,
   PixelCtaBadge,
+  PixelCtaHighlight,
 } from "@/components/ui/pixel/pixel-cta";
 import { PixelCard, PixelCardContent, PixelCardDescription, PixelCardHeader, PixelCardTitle } from "@/components/ui/pixel/pixel-card";
 import { PixelInput } from "@/components/ui/pixel/pixel-input";
@@ -87,7 +88,7 @@ export default function CtaExamplesPage() {
             </PixelCard>
           </div>
           
-          <PixelCta variant="gradient" size="lg">
+          <PixelCta variant="success" size="lg">
             <PixelCtaPattern pattern="dots" />
             <PixelCtaContent>
               <PixelCtaBadge>✨ Limited Time Offer</PixelCtaBadge>
@@ -119,19 +120,19 @@ export default function CtaExamplesPage() {
             </PixelCard>
           </div>
           
-          <PixelCta variant="dark" size="md">
+          <PixelCta variant="purple" size="md">
             <PixelCtaPattern pattern="grid" />
             <PixelCtaContent>
               <PixelCtaTitle>Join the Community</PixelCtaTitle>
               <PixelCtaDescription>
-                Connect with other developers, share your creations, and get help from the community
+                Connect with <PixelCtaHighlight>1000+</PixelCtaHighlight> developers, share your creations, and get help from the community
               </PixelCtaDescription>
               <PixelCtaActions>
-                <PixelButton variant="primary" size="lg">
+                <PixelButton variant="default" size="lg">
                   <Github className="mr-2 h-5 w-5" />
                   Join Discord
                 </PixelButton>
-                <PixelButton variant="secondary" size="lg">
+                <PixelButton variant="ghost" size="lg">
                   View GitHub
                 </PixelButton>
               </PixelCtaActions>
@@ -212,13 +213,13 @@ export default function CtaExamplesPage() {
             </PixelCard>
           </div>
           
-          <PixelCta variant="gradient" size="xl">
+          <PixelCta variant="accent" size="xl">
             <PixelCtaPattern pattern="checkerboard" />
             <PixelCtaContent>
               <PixelCtaBadge>🚀 Open Source</PixelCtaBadge>
               <PixelCtaTitle>Pixel Perfect Design</PixelCtaTitle>
               <PixelCtaDescription>
-                A complete component library for building retro-inspired web applications. 
+                A complete component library for building <PixelCtaHighlight>retro-inspired</PixelCtaHighlight> web applications. 
                 Free and open source forever.
               </PixelCtaDescription>
               <PixelCtaActions>
@@ -245,7 +246,7 @@ export default function CtaExamplesPage() {
             </PixelCard>
           </div>
           
-          <PixelCta variant="primary" size="md">
+          <PixelCta variant="gradient" size="md">
             <PixelCtaPattern pattern="scanlines" />
             <PixelCtaContent>
               <PixelCtaTitle>Follow Us</PixelCtaTitle>
@@ -294,6 +295,68 @@ export default function CtaExamplesPage() {
               </PixelCtaActions>
             </PixelCtaContent>
           </PixelCta>
+        </section>
+
+        {/* Example 9: Color Variants Showcase */}
+        <section>
+          <div className="container mx-auto px-4 mb-4">
+            <PixelCard>
+              <PixelCardHeader>
+                <PixelCardTitle>All Color Variants</PixelCardTitle>
+                <PixelCardDescription>Explore the full color palette - now less orange-heavy!</PixelCardDescription>
+              </PixelCardHeader>
+            </PixelCard>
+          </div>
+          
+          <div className="space-y-8">
+            <PixelCta variant="primary" size="sm">
+              <PixelCtaContent>
+                <PixelCtaTitle>Blue Primary</PixelCtaTitle>
+                <PixelCtaDescription>
+                  Modern blue color for professional look
+                </PixelCtaDescription>
+                <PixelCtaActions>
+                  <PixelButton size="lg">Try Blue</PixelButton>
+                </PixelCtaActions>
+              </PixelCtaContent>
+            </PixelCta>
+
+            <PixelCta variant="success" size="sm">
+              <PixelCtaContent>
+                <PixelCtaTitle>Success Green</PixelCtaTitle>
+                <PixelCtaDescription>
+                  Perfect for positive actions and confirmations
+                </PixelCtaDescription>
+                <PixelCtaActions>
+                  <PixelButton size="lg">Go Green</PixelButton>
+                </PixelCtaActions>
+              </PixelCtaContent>
+            </PixelCta>
+
+            <PixelCta variant="accent" size="sm">
+              <PixelCtaContent>
+                <PixelCtaTitle>Pink Accent</PixelCtaTitle>
+                <PixelCtaDescription>
+                  Eye-catching and playful for creative projects
+                </PixelCtaDescription>
+                <PixelCtaActions>
+                  <PixelButton size="lg">Get Creative</PixelButton>
+                </PixelCtaActions>
+              </PixelCtaContent>
+            </PixelCta>
+
+            <PixelCta variant="purple" size="sm">
+              <PixelCtaContent>
+                <PixelCtaTitle>Royal Purple</PixelCtaTitle>
+                <PixelCtaDescription>
+                  Elegant and premium feel for special offers
+                </PixelCtaDescription>
+                <PixelCtaActions>
+                  <PixelButton size="lg">Explore Premium</PixelButton>
+                </PixelCtaActions>
+              </PixelCtaContent>
+            </PixelCta>
+          </div>
         </section>
       </div>
 
