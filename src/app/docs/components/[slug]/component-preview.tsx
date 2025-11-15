@@ -46,6 +46,13 @@ import { PixelTestimonials, PixelTestimonialCard, PixelTestimonialQuote, PixelTe
 import { PixelStats, PixelStatItem, PixelStatIcon, PixelStatValue, PixelStatLabel, PixelStatTrend } from "@/components/ui/pixel/pixel-stats";
 import { PixelFaq, PixelFaqList, PixelFaqItem, PixelFaqQuestion, PixelFaqAnswer } from "@/components/ui/pixel/pixel-faq";
 
+// Import special components
+import { PixelLoader } from "@/components/ui/pixel/pixel-loader";
+import { PixelTerminal } from "@/components/ui/pixel/pixel-terminal";
+import { PixelHealthBar, PixelManaBar, PixelXPBar, PixelInventory, PixelInventorySlot, PixelAchievement, PixelDamageNumber } from "@/components/ui/pixel/pixel-game-ui";
+import { PixelWindow, PixelWindowTitleBar, PixelWindowContent } from "@/components/ui/pixel/pixel-window";
+import { PixelAudioVisualizer } from "@/components/ui/pixel/pixel-audio-visualizer";
+
 // Import animation components
 import { PixelBlurText } from "@/components/ui/pixel/animations/pixel-blur-text";
 import { PixelGlitchText } from "@/components/ui/pixel/animations/pixel-glitch-text";
@@ -1028,6 +1035,123 @@ export function ComponentPreview({ slug }: { slug: string }) {
             </PixelFaqItem>
           </PixelFaqList>
         </PixelFaq>
+      );
+    
+    case "pixel-loader":
+      return (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h4 className="text-sm font-bold mb-2 text-center font-pixel">Cassette</h4>
+            <PixelLoader variant="cassette" size="sm" text="LOADING" />
+          </div>
+          <div>
+            <h4 className="text-sm font-bold mb-2 text-center font-pixel">Floppy</h4>
+            <PixelLoader variant="floppy" size="sm" text="READING" />
+          </div>
+          <div>
+            <h4 className="text-sm font-bold mb-2 text-center font-pixel">CRT</h4>
+            <PixelLoader variant="crt" size="sm" text="BOOTING" />
+          </div>
+        </div>
+      );
+    
+    case "pixel-terminal":
+      return (
+        <PixelTerminal 
+          variant="matrix" 
+          size="md"
+          prompt="user@pixel:~$"
+          commands={{
+            hello: () => 'Hello! Welcome to Pixel Terminal 👋',
+            info: () => 'Pixel Terminal v1.0\nType "help" for commands',
+            joke: () => 'Why do programmers prefer dark mode?\nBecause light attracts bugs! 🐛',
+          }}
+          welcomeMessage={`Pixel Terminal v1.0
+Type 'help' for available commands.
+Try: hello, info, joke
+
+`}
+        />
+      );
+    
+    case "pixel-health-bar":
+      return (
+        <div className="space-y-4 max-w-2xl mx-auto">
+          <PixelHealthBar current={85} max={100} label="HP" />
+          <PixelManaBar current={60} max={100} label="MP" />
+          <PixelXPBar currentXP={350} requiredXP={500} level={12} />
+        </div>
+      );
+    
+    case "pixel-inventory":
+      return (
+        <PixelInventory columns={5} title="Inventory" className="max-w-md mx-auto">
+          <PixelInventorySlot item="⚔️" rarity="legendary" />
+          <PixelInventorySlot item="🛡️" rarity="epic" />
+          <PixelInventorySlot item="💊" count={5} rarity="common" />
+          <PixelInventorySlot item="🔮" rarity="rare" />
+          <PixelInventorySlot item="👑" rarity="legendary" />
+          <PixelInventorySlot isEmpty />
+          <PixelInventorySlot isEmpty />
+          <PixelInventorySlot isEmpty />
+          <PixelInventorySlot isEmpty />
+          <PixelInventorySlot isEmpty />
+        </PixelInventory>
+      );
+    
+    case "pixel-achievement":
+      return (
+        <div className="space-y-4 max-w-md mx-auto">
+          <PixelAchievement
+            variant="gold"
+            title="Master"
+            description="Defeat 100 enemies"
+            icon="🥇"
+            points={50}
+          />
+          <PixelAchievement
+            variant="silver"
+            title="Experienced"
+            description="Reach level 25"
+            icon="🥈"
+            points={25}
+          />
+        </div>
+      );
+    
+    case "pixel-window":
+      return (
+        <PixelWindow 
+          title="My Computer" 
+          icon="💻" 
+          defaultPosition={{ x: 50, y: 50 }}
+          className="w-[400px]"
+        >
+          <PixelWindowContent>
+            <div className="p-4">
+              <h3 className="font-bold font-pixel mb-2">Welcome to Pixel Window!</h3>
+              <p className="text-sm mb-4">
+                This is a draggable, resizable window component styled like Windows 95/98.
+              </p>
+              <div className="flex gap-2">
+                <PixelButton size="sm">Open</PixelButton>
+                <PixelButton size="sm" variant="secondary">Save</PixelButton>
+              </div>
+            </div>
+          </PixelWindowContent>
+        </PixelWindow>
+      );
+    
+    case "pixel-audio-visualizer":
+      return (
+        <div className="max-w-2xl mx-auto">
+          <PixelAudioVisualizer 
+            variant="bars" 
+            size="md"
+            bars={16}
+            animated={true}
+          />
+        </div>
       );
     
     default:
