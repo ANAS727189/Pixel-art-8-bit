@@ -34,6 +34,7 @@ import { PixelContextMenu, PixelContextMenuContent, PixelContextMenuItem, PixelC
 import { PixelMenubar, PixelMenubarMenu, PixelMenubarTrigger, PixelMenubarContent, PixelMenubarItem, PixelMenubarSeparator } from "@/components/ui/pixel/pixel-menubar";
 import { PixelNavigationMenu, PixelNavigationMenuList, PixelNavigationMenuItem, PixelNavigationMenuTrigger, PixelNavigationMenuContent, PixelNavigationMenuLink } from "@/components/ui/pixel/pixel-navigation-menu";
 import { PixelCommand, PixelCommandInput, PixelCommandList, PixelCommandEmpty, PixelCommandGroup, PixelCommandItem } from "@/components/ui/pixel/pixel-command";
+import { PixelTimelineNavigation, PixelTimelineStep, PixelTimelineSteps } from "@/components/ui/pixel/pixel-timeline-navigation";
 import { PixelSheet, PixelSheetContent, PixelSheetHeader, PixelSheetTitle, PixelSheetTrigger } from "@/components/ui/pixel/pixel-sheet";
 import { PixelDrawer, PixelDrawerTrigger, PixelDrawerContent, PixelDrawerHeader, PixelDrawerTitle, PixelDrawerDescription, PixelDrawerClose } from "@/components/ui/pixel/pixel-drawer";
 import { PixelToastProvider, usePixelToast as useSimpleToast } from "@/components/ui/pixel/pixel-toast";
@@ -1574,7 +1575,41 @@ Try: hello, info, joke
           </div>
         </div>
       );
-    
+    case "pixel-timeline-navigation":
+      const [timelineStep, setTimelineStep] = useState(2);
+      return (
+        <div className="space-y-12">
+          <div>
+            <h3 className="text-lg font-bold mb-4">Horizontal Timeline</h3>
+            <PixelTimelineNavigation 
+              currentStep={timelineStep}
+              onStepClick={setTimelineStep}
+            >
+              <PixelTimelineSteps>
+                <PixelTimelineStep step={1} label="Account" description="Setup account" />
+                <PixelTimelineStep step={2} label="Profile" description="Add details" />
+                <PixelTimelineStep step={3} label="Complete" description="Finish setup" />
+              </PixelTimelineSteps>
+            </PixelTimelineNavigation>
+          </div>
+          
+          <div>
+            <h3 className="text-lg font-bold mb-4">Vertical Timeline</h3>
+            <PixelTimelineNavigation 
+              currentStep={2}
+              orientation="vertical"
+              size="sm"
+            >
+              <PixelTimelineSteps>
+                <PixelTimelineStep step={1} label="Start" description="Begin your journey" />
+                <PixelTimelineStep step={2} label="Progress" description="Working on it" />
+                <PixelTimelineStep step={3} label="Review" description="Almost there" />
+                <PixelTimelineStep step={4} label="Done" description="All complete" />
+              </PixelTimelineSteps>
+            </PixelTimelineNavigation>
+          </div>
+        </div>
+      );
     default:
       return (
         <div className="text-center py-8">

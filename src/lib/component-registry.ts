@@ -815,7 +815,122 @@ function YourComponent() {
 </PixelCommand>`,
     componentCode: `/src/components/ui/pixel-command.tsx`,
   },
+  {
+    slug: "pixel-timeline-navigation",
+    title: "Timeline Navigation",
+    description: "Step-by-step timeline navigation with progress tracking.",
+    category: "Navigation",
+    installation: "",
+    importCode: `import { PixelTimelineNavigation, PixelTimelineStep, PixelTimelineSteps } from "@/components/ui/pixel/pixel-timeline-navigation"`,
+    usageCode: `const [currentStep, setCurrentStep] = useState(2);
 
+<PixelTimelineNavigation 
+  currentStep={currentStep}
+  onStepClick={setCurrentStep}
+>
+  <PixelTimelineSteps>
+    <PixelTimelineStep step={1} label="Start" description="Begin process" />
+    <PixelTimelineStep step={2} label="Progress" description="In progress" />
+    <PixelTimelineStep step={3} label="Complete" description="Finish" />
+  </PixelTimelineSteps>
+</PixelTimelineNavigation>`,
+    componentCode: `/src/components/ui/pixel/pixel-timeline-navigation.tsx`,
+    props: [
+      { name: "currentStep", type: "number", description: "Current active step number" },
+      { name: "onStepClick", type: "(step: number) => void", description: "Callback when step is clicked" },
+      { name: "orientation", type: '"horizontal" | "vertical"', default: '"horizontal"', description: "Layout orientation" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Size of step indicators" },
+    ],
+    examples: [
+      {
+        title: "Horizontal Timeline",
+        description: "Basic horizontal timeline with 3 steps",
+        code: `const [currentStep, setCurrentStep] = useState(2);
+
+<PixelTimelineNavigation 
+  currentStep={currentStep}
+  onStepClick={setCurrentStep}
+>
+  <PixelTimelineSteps>
+    <PixelTimelineStep step={1} label="Account" description="Setup account" />
+    <PixelTimelineStep step={2} label="Profile" description="Add details" />
+    <PixelTimelineStep step={3} label="Finish" description="Complete setup" />
+  </PixelTimelineSteps>
+</PixelTimelineNavigation>`,
+      },
+      {
+        title: "Vertical Timeline",
+        description: "Vertical layout with custom icons",
+        code: `const [currentStep, setCurrentStep] = useState(1);
+
+<PixelTimelineNavigation 
+  currentStep={currentStep}
+  onStepClick={setCurrentStep}
+  orientation="vertical"
+>
+  <PixelTimelineSteps>
+    <PixelTimelineStep 
+      step={1} 
+      label="Order Placed" 
+      description="Your order has been received"
+      icon={<ShoppingCart className="h-6 w-6" />}
+    />
+    <PixelTimelineStep 
+      step={2} 
+      label="Processing" 
+      description="Preparing your items"
+      icon={<Package className="h-6 w-6" />}
+    />
+    <PixelTimelineStep 
+      step={3} 
+      label="Shipped" 
+      description="On the way"
+      icon={<Truck className="h-6 w-6" />}
+    />
+    <PixelTimelineStep 
+      step={4} 
+      label="Delivered" 
+      description="Package delivered"
+      icon={<CheckCircle className="h-6 w-6" />}
+    />
+  </PixelTimelineSteps>
+</PixelTimelineNavigation>`,
+      },
+      {
+        title: "Different Sizes",
+        description: "Timeline with different size options",
+        code: `const [step1, setStep1] = useState(2);
+const [step2, setStep2] = useState(2);
+const [step3, setStep3] = useState(2);
+
+<div className="space-y-8">
+  <PixelTimelineNavigation currentStep={step1} onStepClick={setStep1} size="sm">
+    <PixelTimelineSteps>
+      <PixelTimelineStep step={1} label="Small" />
+      <PixelTimelineStep step={2} label="Size" />
+      <PixelTimelineStep step={3} label="Demo" />
+    </PixelTimelineSteps>
+  </PixelTimelineNavigation>
+
+  <PixelTimelineNavigation currentStep={step2} onStepClick={setStep2} size="md">
+    <PixelTimelineSteps>
+      <PixelTimelineStep step={1} label="Medium" />
+      <PixelTimelineStep step={2} label="Size" />
+      <PixelTimelineStep step={3} label="Demo" />
+    </PixelTimelineSteps>
+  </PixelTimelineNavigation>
+
+  <PixelTimelineNavigation currentStep={step3} onStepClick={setStep3} size="lg">
+    <PixelTimelineSteps>
+      <PixelTimelineStep step={1} label="Large" />
+      <PixelTimelineStep step={2} label="Size" />
+      <PixelTimelineStep step={3} label="Demo" />
+    </PixelTimelineSteps>
+  </PixelTimelineNavigation>
+</div>`,
+      },
+    ],
+  },
   // Overlays
   {
     slug: "pixel-dialog",
