@@ -1,7 +1,9 @@
-# Roles 
+# Roles
 
-## Shardendu Mishra 
+## Shardendu Mishra (Github Username - MishraShardendu22)
+
 - Initialised the project with NextJS 16, using biome as linter and other mordern NextJS 16 compatible techs.
+- Made Portfolio Builder uisng resume parsing api and form based resume builder.
 - Made components for this UI library example button, form and animation components.
 - Made the shop demo that uses redux and the example web page that uses these components.
 - Made parts of the Treasure hunt website that was used in IIIT Dharwad's Tech Fest and had 200 live users.(170K requests, 5k+ visits)
@@ -9,6 +11,7 @@
 - Made the leaderboard webpage as a seperate deployment made it using Svelte and connected it with the main website using microfrontend concept.
 
 ## Anas Khan (Github Username - ANAS727189)
+
 - Created 10 unique special components not found in any other UI library (PixelLoader, PixelTerminal, PixelGameUI, PixelWindow, PixelAudioVisualizer, PixelCodeBlock, PixelTimeline, PixelNotification, PixelChat, PixelCountdown) with 60+ interactive example pages.
 - Built 10 comprehensive layout components from hero section to FAQ section (PixelHero, PixelBento, PixelFeatures, PixelCta, PixelPricing, PixelFooter, PixelTestimonials, PixelStats, PixelFaq) with multiple variants and full documentation.
 - Created complete "Retro Game Central" patterns page showcasing all 10 special components in a real-world gaming platform with player dashboard, inventory system, live chat, terminal, and audio visualizer.
@@ -17,6 +20,7 @@
 - Made parts of the Treasure hunt website that was used in IIIT Dharwad's Tech Fest and had 200 live users.(170K requests, 5k+ visits)
 
 ## Himanshu Kumar (Github Username - himanshukumar19)
+
 - Created 4 new feedback components (PixelRating, PixelWarningTooltip, PixelUndoChip, PixelAIBubble) with interactive previews and full documentation.
 - Built comprehensive Redux filtering system for Pixel Shop with real-time search, multi-select category filters, price range filtering, and 5 sort options.
 - Fixed missing previews and code examples for 6 components (Drawer, AlertDialog, Toast, Sonner, Navigation Menu, Command).
@@ -179,6 +183,7 @@ Example: [http://localhost:3000/docs/components/pixel-button](http://localhost:3
 ## 🎯 Example Pages
 
 ### Landing Page (`/`)
+
 - Hero section with pixel styling
 - Feature grid
 - Component showcase
@@ -186,6 +191,7 @@ Example: [http://localhost:3000/docs/components/pixel-button](http://localhost:3
 
 ### Dashboard Example (`/examples`)
 Full dashboard demonstrating:
+
 - Stats cards with icons
 - Tabs for navigation
 - Profile forms with inputs
@@ -261,6 +267,7 @@ MIT License - feel free to use this in your projects!
 ---
 
 **Happy coding with Pixel UI! 🎮✨**
+
 * uses `forwardRef` for input-like elements,
 * uses `VariantProps` from CVA,
 * includes ARIA attributes and keyboard considerations.
