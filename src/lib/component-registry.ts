@@ -508,6 +508,116 @@ toast({
       },
     ],
   },
+  {
+    slug: "pixel-undo-chip",
+    title: "Undo Chip",
+    description: "Small chip/snackbar showing action confirmation with undo option. Very user-friendly, low-friction feedback.",
+    category: "Feedback",
+    installation: "npm install lucide-react",
+    importCode: `import { PixelUndoChipProvider, usePixelUndoChip } from "@/components/ui/pixel/pixel-undo-chip"`,
+    usageCode: `const { showUndoChip } = usePixelUndoChip();
+
+// Show undo chip
+showUndoChip("Item deleted", {
+  onUndo: () => console.log("Undo delete"),
+  duration: 5000,
+  variant: "default"
+});`,
+    componentCode: `/src/components/ui/pixel/pixel-undo-chip.tsx`,
+    props: [
+      { name: "message", type: "string", description: "Message to display in the chip" },
+      { name: "onUndo", type: "() => void", description: "Callback when undo button is clicked" },
+      { name: "onClose", type: "() => void", description: "Callback when chip is closed" },
+      { name: "duration", type: "number", default: "5000", description: "Auto-dismiss duration in milliseconds (0 to disable)" },
+      { name: "variant", type: '"default" | "info" | "warning" | "error"', default: '"default"', description: "Visual variant" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Chip size" },
+      { name: "showIcon", type: "boolean", default: "true", description: "Show check icon" },
+      { name: "showUndoIcon", type: "boolean", default: "true", description: "Show undo icon in button" },
+    ],
+    examples: [
+      {
+        title: "Delete Action with Undo",
+        code: `const { showUndoChip } = usePixelUndoChip();
+
+<PixelButton 
+  onClick={() => {
+    // Delete item
+    showUndoChip("Item deleted", {
+      onUndo: () => console.log("Restore item"),
+      variant: "default"
+    });
+  }}
+>
+  Delete Item
+</PixelButton>`,
+      },
+      {
+        title: "Different Variants",
+        code: `const { showUndoChip } = usePixelUndoChip();
+
+<div className="flex gap-2">
+  <PixelButton onClick={() => 
+    showUndoChip("Done", { 
+      variant: "default",
+      onUndo: () => console.log("Undo") 
+    })
+  }>
+    Default
+  </PixelButton>
+  
+  <PixelButton onClick={() => 
+    showUndoChip("Info message", { 
+      variant: "info",
+      onUndo: () => console.log("Undo") 
+    })
+  }>
+    Info
+  </PixelButton>
+  
+  <PixelButton onClick={() => 
+    showUndoChip("Warning!", { 
+      variant: "warning",
+      onUndo: () => console.log("Undo") 
+    })
+  }>
+    Warning
+  </PixelButton>
+  
+  <PixelButton onClick={() => 
+    showUndoChip("Error occurred", { 
+      variant: "error",
+      onUndo: () => console.log("Undo") 
+    })
+  }>
+    Error
+  </PixelButton>
+</div>`,
+      },
+      {
+        title: "With Provider Setup",
+        code: `// Wrap your app with the provider
+<PixelUndoChipProvider position="bottom-center">
+  <YourApp />
+</PixelUndoChipProvider>
+
+// Then use in any component
+function YourComponent() {
+  const { showUndoChip } = usePixelUndoChip();
+  
+  return (
+    <PixelButton onClick={() => 
+      showUndoChip("Message sent", {
+        onUndo: () => console.log("Unsend message"),
+        duration: 5000
+      })
+    }>
+      Send Message
+    </PixelButton>
+  );
+}`,
+      },
+    ],
+  },
 
   // Navigation
   {

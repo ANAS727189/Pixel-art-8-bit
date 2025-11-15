@@ -24,6 +24,22 @@
   - Fully documented with multiple usage examples
   - Live interactive preview with all severity levels
 
+- **PixelUndoChip Component**
+  - Created undo chip/snackbar component for feedback category
+  - Small chip showing "Done — Undo?" style feedback
+  - Very user-friendly, low-friction feedback mechanism
+  - Four visual variants: default, info, warning, error
+  - Three size options: small, medium, and large
+  - Auto-dismiss with configurable duration
+  - Optional undo action with callback
+  - Check icon and undo icon support
+  - Context provider for easy usage throughout app
+  - Six positioning options (top/bottom, left/center/right)
+  - Built with class-variance-authority for variants
+  - Pixel-art styling with borders and shadows
+  - Fully documented with usage examples
+  - Live interactive preview showing delete, send, and save actions
+
 ### 🐛 Fixed
 
 - **Menubar Preview** 
@@ -77,8 +93,9 @@
 **New Components:** 
 - PixelRating - Interactive star rating system
 - PixelWarningTooltip - Warning and alert tooltips with severity levels
+- PixelUndoChip - Undo chip/snackbar for action confirmation with undo option
 
 **Fixed:** Menubar, Navigation Menu, Command, Drawer, Toast, and Sonner documentation previews  
 **Documentation:** Added complete usage examples for 4 components (Navigation Menu, Command, Alert Dialog, Drawer)  
-**Files Modified:** 4 files (pixel-warning-tooltip.tsx created, component-preview.tsx, component-registry.ts, CHANGELOG.md)  
-**Impact:** Complete documentation coverage with all previews working, new feedback component for user warnings
+**Files Modified:** 6 files (pixel-warning-tooltip.tsx, pixel-undo-chip.tsx created, component-preview.tsx, component-registry.ts, CHANGELOG.md)  
+**Impact:** Complete documentation coverage, two new feedback components for better user experience and low-friction interactions

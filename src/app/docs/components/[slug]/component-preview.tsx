@@ -45,6 +45,7 @@ import { PixelScrollArea } from "@/components/ui/pixel/pixel-scroll-area";
 import { PixelAspectRatio } from "@/components/ui/pixel/pixel-aspect-ratio";
 import { PixelHoverCard, PixelHoverCardContent, PixelHoverCardTrigger } from "@/components/ui/pixel/pixel-hover-card";
 import { PixelWarningTooltip, PixelWarningTooltipTrigger, PixelWarningTooltipContent, PixelWarningTooltipProvider } from "@/components/ui/pixel/pixel-warning-tooltip";
+import { PixelUndoChipProvider, usePixelUndoChip } from "@/components/ui/pixel/pixel-undo-chip";
 
 // Import animation components
 import { PixelBlurText } from "@/components/ui/pixel/animations/pixel-blur-text";
@@ -126,6 +127,53 @@ function SonnerDemo() {
         Loading Toast
       </PixelButton>
     </div>
+  );
+}
+
+// Helper component for Undo Chip demo
+function UndoChipDemo() {
+  const { showUndoChip } = usePixelUndoChip();
+  
+  return (
+    <div className="flex gap-4 flex-wrap">
+      <PixelButton 
+        onClick={() => showUndoChip("Item deleted", {
+          onUndo: () => console.log("Undo delete"),
+          variant: "default"
+        })}
+      >
+        Delete Item
+      </PixelButton>
+      
+      <PixelButton 
+        variant="secondary"
+        onClick={() => showUndoChip("Message sent", {
+          onUndo: () => console.log("Undo send"),
+          variant: "info"
+        })}
+      >
+        Send Message
+      </PixelButton>
+      
+      <PixelButton 
+        onClick={() => showUndoChip("Changes saved", {
+          onUndo: () => console.log("Undo changes"),
+          variant: "default",
+          duration: 8000
+        })}
+      >
+        Save Changes
+      </PixelButton>
+    </div>
+  );
+}
+
+// Wrapper component that provides undo chip context
+function UndoChipDemoWrapper() {
+  return (
+    <PixelUndoChipProvider position="bottom-center">
+      <UndoChipDemo />
+    </PixelUndoChipProvider>
   );
 }
 
@@ -397,6 +445,9 @@ export function ComponentPreview({ slug }: { slug: string }) {
           </div>
         </PixelWarningTooltipProvider>
       );
+    
+    case "pixel-undo-chip":
+      return <UndoChipDemoWrapper />;
     
     case "pixel-breadcrumb":
       return (
