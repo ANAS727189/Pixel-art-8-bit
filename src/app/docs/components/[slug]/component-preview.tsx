@@ -882,32 +882,32 @@ export function ComponentPreview({ slug }: { slug: string }) {
             <PixelFooterSection>
               <PixelFooterTitle>Product</PixelFooterTitle>
               <PixelFooterLinks>
-                <PixelFooterLink href="#">Features</PixelFooterLink>
-                <PixelFooterLink href="#">Pricing</PixelFooterLink>
+                <PixelFooterLink><a href="#">Features</a></PixelFooterLink>
+                <PixelFooterLink><a href="#">Pricing</a></PixelFooterLink>
               </PixelFooterLinks>
             </PixelFooterSection>
             
             <PixelFooterSection>
               <PixelFooterTitle>Company</PixelFooterTitle>
               <PixelFooterLinks>
-                <PixelFooterLink href="#">About</PixelFooterLink>
-                <PixelFooterLink href="#">Blog</PixelFooterLink>
+                <PixelFooterLink><a href="#">About</a></PixelFooterLink>
+                <PixelFooterLink><a href="#">Blog</a></PixelFooterLink>
               </PixelFooterLinks>
             </PixelFooterSection>
             
             <PixelFooterSection>
               <PixelFooterTitle>Resources</PixelFooterTitle>
               <PixelFooterLinks>
-                <PixelFooterLink href="#">Docs</PixelFooterLink>
-                <PixelFooterLink href="#">Guides</PixelFooterLink>
+                <PixelFooterLink><a href="#">Docs</a></PixelFooterLink>
+                <PixelFooterLink><a href="#">Guides</a></PixelFooterLink>
               </PixelFooterLinks>
             </PixelFooterSection>
             
             <PixelFooterSection>
               <PixelFooterTitle>Legal</PixelFooterTitle>
               <PixelFooterLinks>
-                <PixelFooterLink href="#">Privacy</PixelFooterLink>
-                <PixelFooterLink href="#">Terms</PixelFooterLink>
+                <PixelFooterLink><a href="#">Privacy</a></PixelFooterLink>
+                <PixelFooterLink><a href="#">Terms</a></PixelFooterLink>
               </PixelFooterLinks>
             </PixelFooterSection>
           </PixelFooterGrid>
@@ -917,8 +917,8 @@ export function ComponentPreview({ slug }: { slug: string }) {
           <PixelFooterBottom>
             <PixelFooterCopyright>© 2024 Pixel UI</PixelFooterCopyright>
             <PixelFooterSocial>
-              <PixelFooterSocialLink href="#" icon="🐦" />
-              <PixelFooterSocialLink href="#" icon="💼" />
+              <PixelFooterSocialLink href="#">🐦</PixelFooterSocialLink>
+              <PixelFooterSocialLink href="#">💼</PixelFooterSocialLink>
             </PixelFooterSocial>
           </PixelFooterBottom>
         </PixelFooter>
@@ -928,7 +928,7 @@ export function ComponentPreview({ slug }: { slug: string }) {
       return (
         <PixelTestimonials columns={3} gap="md" className="max-w-5xl mx-auto">
           <PixelTestimonialCard variant="default">
-            <PixelTestimonialRating rating={5} />
+            <PixelTestimonialRating />
             <PixelTestimonialQuote>
               "Amazing library! The pixel-art aesthetic is perfect."
             </PixelTestimonialQuote>
@@ -942,7 +942,7 @@ export function ComponentPreview({ slug }: { slug: string }) {
           </PixelTestimonialCard>
           
           <PixelTestimonialCard variant="primary">
-            <PixelTestimonialRating rating={5} />
+            <PixelTestimonialRating />
             <PixelTestimonialQuote>
               "Easy to use and highly customizable. Love it!"
             </PixelTestimonialQuote>
@@ -956,7 +956,7 @@ export function ComponentPreview({ slug }: { slug: string }) {
           </PixelTestimonialCard>
           
           <PixelTestimonialCard variant="default">
-            <PixelTestimonialRating rating={4} />
+            <PixelTestimonialRating />
             <PixelTestimonialQuote>
               "Excellent attention to detail. Production ready."
             </PixelTestimonialQuote>
