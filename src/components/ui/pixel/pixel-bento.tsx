@@ -32,7 +32,7 @@ const pixelBentoGridVariants = cva(
     defaultVariants: {
       variant: "default",
       columns: "auto",
-      gap: "md",
+      gap: "none",
     },
   }
 );
