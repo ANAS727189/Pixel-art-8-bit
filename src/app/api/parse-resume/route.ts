@@ -43,138 +43,129 @@ export interface ResumeData {
   experience: Experience[];
 }
 
-if (!process.env.GEMINI_API_KEY) {
-  throw new Error('GEMINI_API_KEY is not set in environment variables');
+if (!process.env.OPENROUTER_API_KEY) {
+  throw new Error('OPENROUTER_API_KEY is not set in environment variables');
 }
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+const API_URL = 'https://openrouter.ai/api/v1/chat/completions';
 
-const resumeSchema = {
-  type: 'OBJECT',
-  properties: {
-    personalInfo: {
-      type: 'OBJECT',
-      properties: {
-        name: { type: 'STRING' },
-        email: { type: 'STRING' },
-        phone: { type: 'STRING' },
-        location: { type: 'STRING' },
-        linkedin: { type: 'STRING' },
-        github: { type: 'STRING' },
-        website: { type: 'STRING' },
-      },
-      required: ['name'],
-    },
-    education: {
-      type: 'ARRAY',
-      items: {
-        type: 'OBJECT',
-        properties: {
-          institution: { type: 'STRING' },
-          degree: { type: 'STRING' },
-          field: { type: 'STRING' },
-          dates: { type: 'STRING' },
-          gpa: { type: 'STRING' },
-          location: { type: 'STRING' },
-        },
-      },
-    },
-    projects: {
-      type: 'ARRAY',
-      items: {
-        type: 'OBJECT',
-        properties: {
-          name: { type: 'STRING' },
-          description: { type: 'STRING' },
-          technologies: { 
-            type: 'ARRAY',
-            items: { type: 'STRING' },
-          },
-          github: { type: 'STRING' },
-          link: { type: 'STRING' },
-          dates: { type: 'STRING' },
-        },
-      },
-    },
-    skills: {
-      type: 'ARRAY',
-      items: { type: 'STRING' },
-    },
-    achievements: {
-      type: 'ARRAY',
-      items: { type: 'STRING' },
-    },
-    experience: {
-      type: 'ARRAY',
-      items: {
-        type: 'OBJECT',
-        properties: {
-          company: { type: 'STRING' },
-          position: { type: 'STRING' },
-          dates: { type: 'STRING' },
-          location: { type: 'STRING' },
-          responsibilities: {
-            type: 'ARRAY',
-            items: { type: 'STRING' },
-          },
-        },
-      },
-    },
-  },
-  required: ['personalInfo'],
-};
+// In-memory storage for parsed resumes (in production, use a database)
+const resumeCache = new Map<string, ResumeData>();
 
 export async function parseResumeAsync(resumeText: string): Promise<ResumeData> {
   try {
     console.log('[Parser] Starting AI parsing, text length:', resumeText.length);
     
-    const prompt = `Extract structured information from this resume. Parse all sections carefully.
-If a section is not found, return an empty array or appropriate default value.
+    if (!OPENROUTER_API_KEY || OPENROUTER_API_KEY === 'undefined') {
+      throw new Error('OPENROUTER_API_KEY is not properly configured');
+    }
+    
+    const prompt = `Extract structured information from this resume and return it as a JSON object with the following structure:
 
-PERSONAL INFO: name, email, phone, location, social links (linkedin, github, website)
-EDUCATION: institution, degree, field of study, dates, GPA, location
-PROJECTS: name, description, technologies array, github/link URLs, dates
-SKILLS: technical skills, programming languages, frameworks, tools as array of strings
-ACHIEVEMENTS: certifications, awards, competitions, honors as array of strings
-EXPERIENCE: company, position, dates, location, responsibilities as array of strings
+{
+  "personalInfo": {
+    "name": "string (required)",
+    "email": "string",
+    "phone": "string",
+    "location": "string",
+    "linkedin": "string (optional)",
+    "github": "string (optional)",
+    "website": "string (optional)"
+  },
+  "education": [
+    {
+      "institution": "string",
+      "degree": "string",
+      "field": "string (optional)",
+      "dates": "string",
+      "gpa": "string (optional)",
+      "location": "string (optional)"
+    }
+  ],
+  "projects": [
+    {
+      "name": "string",
+      "description": "string",
+      "technologies": ["array of strings"],
+      "github": "string (optional)",
+      "link": "string (optional)",
+      "dates": "string (optional)"
+    }
+  ],
+  "skills": ["array of strings - technical skills, programming languages, frameworks, tools"],
+  "achievements": ["array of strings - certifications, awards, competitions, honors"],
+  "experience": [
+    {
+      "company": "string",
+      "position": "string",
+      "dates": "string",
+      "location": "string (optional)",
+      "responsibilities": ["array of strings"]
+    }
+  ]
+}
+
+Parse all sections carefully. If a section is not found, return an empty array or appropriate default value.
+Return ONLY the JSON object, no additional text or explanations.
 
 Resume text:
 ${resumeText}`;
 
     const requestBody = {
-      contents: [{
-        parts: [{ text: prompt }]
-      }],
-      generationConfig: {
-        response_mime_type: 'application/json',
-        response_schema: resumeSchema,
-      },
+      model: "openai/gpt-4o-mini",
+      messages: [
+        {
+          role: "user",
+          content: prompt
+        }
+      ],
+      response_format: { type: "json_object" }
     };
 
-    const response = await fetch(`${API_URL}?key=${GEMINI_API_KEY}`, {
+    console.log('[Parser] Sending request to OpenRouter API...');
+    console.log('[Parser] Using model:', requestBody.model);
+    
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
+        'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+        'X-Title': 'Resume Parser'
       },
       body: JSON.stringify(requestBody),
     });
 
+    console.log('[Parser] Response status:', response.status, response.statusText);
+
     if (!response.ok) {
       const errorText = await response.text();
       console.error('[Parser] API error response:', errorText);
-      throw new Error(`Gemini API error: ${response.status} ${response.statusText}`);
+      throw new Error(`OpenRouter API error: ${response.status} ${response.statusText} - ${errorText.substring(0, 200)}`);
     }
 
-    const data = await response.json();
-    console.log('[Parser] API response received');
+    const responseText = await response.text();
+    console.log('[Parser] Raw response received, length:', responseText.length);
+    console.log('[Parser] Response preview:', responseText.substring(0, 200));
 
-    if (!data.candidates || !data.candidates[0]?.content?.parts?.[0]?.text) {
+    let data;
+    try {
+      data = JSON.parse(responseText);
+    } catch (parseError) {
+      console.error('[Parser] Failed to parse JSON response');
+      console.error('[Parser] Response text:', responseText.substring(0, 500));
+      throw new Error('API returned invalid JSON: ' + responseText.substring(0, 200));
+    }
+    
+    console.log('[Parser] API response received and parsed');
+
+    if (!data.choices || !data.choices[0]?.message?.content) {
       console.error('[Parser] Invalid response structure:', JSON.stringify(data, null, 2));
-      throw new Error('Invalid response structure from Gemini API');
+      throw new Error('Invalid response structure from OpenRouter API');
     }
 
-    const text = data.candidates[0].content.parts[0].text;
+    const text = data.choices[0].message.content;
     console.log('[Parser] Response text length:', text.length);
 
     const parsedData = JSON.parse(text);
@@ -195,5 +186,116 @@ ${resumeText}`;
       console.error('[Parser] Error stack:', error.stack);
     }
     throw new Error(`Failed to parse resume: ${error instanceof Error ? error.message : 'Unknown error'}`);
+  }
+}
+
+// POST handler for uploading and parsing resume
+export async function POST(request: Request) {
+  try {
+    console.log('[API] POST /api/parse-resume - Request received');
+    
+    const formData = await request.formData();
+    const file = formData.get('file') as File;
+
+    if (!file) {
+      console.error('[API] No file provided in request');
+      return Response.json(
+        { success: false, error: 'No file provided' },
+        { status: 400 }
+      );
+    }
+
+    console.log('[API] File received:', file.name, 'Size:', file.size, 'Type:', file.type);
+
+    // Read PDF content
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+
+    // Use pdf-parse to extract text
+    const pdf = await import('pdf-parse-fork');
+    const pdfData = await pdf.default(buffer);
+    const resumeText = pdfData.text;
+
+    console.log('[API] PDF text extracted, length:', resumeText.length);
+
+    if (!resumeText || resumeText.trim().length < 50) {
+      console.error('[API] Insufficient text extracted from PDF');
+      return Response.json(
+        { 
+          success: false, 
+          error: 'Could not extract sufficient text from PDF',
+          details: 'The PDF appears to be empty or text extraction failed'
+        },
+        { status: 400 }
+      );
+    }
+
+    // Parse resume using AI
+    const parsedData = await parseResumeAsync(resumeText);
+
+    // Generate unique ID for this resume
+    const id = Date.now().toString();
+    
+    // Store in cache
+    resumeCache.set(id, parsedData);
+    
+    console.log('[API] Resume parsed successfully, ID:', id);
+
+    return Response.json({
+      success: true,
+      id,
+      data: parsedData
+    });
+
+  } catch (error) {
+    console.error('[API] Error in POST handler:', error);
+    return Response.json(
+      { 
+        success: false, 
+        error: 'Failed to process resume',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// GET handler for retrieving cached resume data
+export async function GET(request: Request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+
+    if (!id) {
+      return Response.json(
+        { success: false, error: 'No ID provided' },
+        { status: 400 }
+      );
+    }
+
+    const data = resumeCache.get(id);
+
+    if (!data) {
+      return Response.json(
+        { success: false, error: 'Resume not found' },
+        { status: 404 }
+      );
+    }
+
+    return Response.json({
+      success: true,
+      data
+    });
+
+  } catch (error) {
+    console.error('[API] Error in GET handler:', error);
+    return Response.json(
+      { 
+        success: false, 
+        error: 'Failed to retrieve resume',
+        details: error instanceof Error ? error.message : 'Unknown error'
+      },
+      { status: 500 }
+    );
   }
 }
