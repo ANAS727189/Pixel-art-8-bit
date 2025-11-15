@@ -199,6 +199,53 @@ export const componentRegistry: ComponentDoc[] = [
     componentCode: `/src/components/ui/pixel-label.tsx`,
   },
   {
+    slug: "pixel-rating",
+    title: "Rating",
+    description: "Interactive star rating component with pixel styling.",
+    category: "Forms",
+    installation: "",
+    importCode: `import { PixelRating } from "@/components/ui/pixel/pixel-rating"`,
+    usageCode: `<PixelRating value={3} maxStars={5} onRatingChange={(rating) => console.log(rating)} />`,
+    componentCode: `/src/components/ui/pixel/pixel-rating.tsx`,
+    props: [
+      { name: "value", type: "number", default: "0", description: "Current rating value" },
+      { name: "maxStars", type: "number", default: "5", description: "Maximum number of stars" },
+      { name: "onRatingChange", type: "(rating: number) => void", description: "Callback when rating changes" },
+      { name: "readOnly", type: "boolean", default: "false", description: "Make rating read-only" },
+      { name: "variant", type: '"default" | "gold" | "red"', default: '"default"', description: "Color variant" },
+      { name: "size", type: '"sm" | "md" | "lg"', default: '"md"', description: "Star size" },
+    ],
+    examples: [
+      {
+        title: "Interactive Rating",
+        code: `<PixelRating 
+  value={4} 
+  maxStars={5}
+  variant="gold"
+  size="lg"
+  onRatingChange={(rating) => console.log('Rating:', rating)}
+/>`,
+      },
+      {
+        title: "Read-Only Display",
+        code: `<PixelRating 
+  value={3.5} 
+  maxStars={5}
+  variant="default"
+  readOnly={true}
+/>`,
+      },
+      {
+        title: "Different Sizes",
+        code: `<div className="flex flex-col gap-4">
+  <PixelRating value={4} size="sm" />
+  <PixelRating value={4} size="md" />
+  <PixelRating value={4} size="lg" />
+</div>`,
+      },
+    ],
+  },
+  {
     slug: "pixel-form",
     title: "Form",
     description: "Form components integrated with react-hook-form.",

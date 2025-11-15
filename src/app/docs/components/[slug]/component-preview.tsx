@@ -14,6 +14,7 @@ import { PixelRadioGroup, PixelRadioGroupItem } from "@/components/ui/pixel/pixe
 import { PixelTextarea } from "@/components/ui/pixel/pixel-textarea";
 import { PixelSlider } from "@/components/ui/pixel/pixel-slider";
 import { PixelLabel } from "@/components/ui/pixel/pixel-label";
+import { PixelRating } from "@/components/ui/pixel/pixel-rating";
 import { PixelAvatar, PixelAvatarFallback, PixelAvatarImage } from "@/components/ui/pixel/pixel-avatar";
 import { PixelSkeleton } from "@/components/ui/pixel/pixel-skeleton";
 import { PixelTable, PixelTableBody, PixelTableCell, PixelTableHead, PixelTableHeader, PixelTableRow } from "@/components/ui/pixel/pixel-table";
@@ -201,6 +202,20 @@ export function ComponentPreview({ slug }: { slug: string }) {
     
     case "pixel-label":
       return <PixelLabel>This is a label</PixelLabel>;
+    
+    case "pixel-rating":
+      const [rating, setRating] = useState(3);
+      return (
+        <div className="space-y-4">
+          <PixelRating 
+            value={rating} 
+            onRatingChange={setRating}
+            variant="gold"
+            size="lg"
+          />
+          <p className="text-sm">Current rating: {rating} stars</p>
+        </div>
+      );
     
     case "pixel-avatar":
       return (
