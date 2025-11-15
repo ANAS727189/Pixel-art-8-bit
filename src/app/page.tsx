@@ -49,6 +49,34 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Featured Patterns Section */}
+      <section className="container mx-auto px-4 py-12 mb-8">
+        <div className="max-w-5xl mx-auto">
+          <PixelCard className="border-4 border-[#ff8c00] dark:border-[#ffd700] bg-gradient-to-r from-[#ffd700]/10 to-[#ff8c00]/10">
+            <PixelCardHeader className="text-center pb-4">
+              <div className="flex justify-center mb-3">
+                <PixelBadge variant="warning" className="text-lg px-4 py-2">
+                   FEATURED
+                </PixelBadge>
+              </div>
+              <PixelCardTitle className="text-3xl md:text-4xl mb-3">
+                🎮 Retro Game Pattern
+              </PixelCardTitle>
+              <PixelCardDescription className="text-base md:text-lg">
+                See all 10 special components in action! A complete gaming platform showcasing PixelLoader, PixelTerminal, PixelGameUI, PixelChat, and more.
+              </PixelCardDescription>
+            </PixelCardHeader>
+            <PixelCardFooter className="flex justify-center pt-2">
+              <Link href="/patterns" aria-label="View the complete Retro Game Pattern demo">
+                <PixelButton size="lg" className="group">
+                  View Live Demo <Gamepad2 className="ml-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                </PixelButton>
+              </Link>
+            </PixelCardFooter>
+          </PixelCard>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="container mx-auto px-4 py-20" aria-labelledby="features-heading">
         <h2 id="features-heading" className="text-3xl font-bold uppercase tracking-wider font-[family-name:var(--font-pixel)] mb-12 text-center dark:text-[#ffd700]">
