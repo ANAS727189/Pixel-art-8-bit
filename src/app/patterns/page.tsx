@@ -84,37 +84,44 @@ export default function PatternsPage() {
 
   return (
     <div className="min-h-screen bg-[#000000] text-white">
-      {/* Hero Section with Countdown */}
-      <section className="relative border-b-4 border-[#ff8c00] bg-linear-to-b from-pixel-dark-surface to-[#000000] overflow-hidden">
-        <div className="absolute inset-0 opacity-20">
-          <PixelAudioVisualizer variant="bars" animate={true} />
-        </div>
-        
-        <div className="container mx-auto px-4 py-16 relative z-10">
-          <PixelHero variant="arcade" size="lg" className="border-0">
-            <PixelHeroContent>
-              <PixelHeroBadge>🎮 LIVE NOW</PixelHeroBadge>
-              <PixelHeroTitle size="lg">RETRO GAME CENTRAL</PixelHeroTitle>
-              <PixelHeroSubtitle size="md">Built with Special Components</PixelHeroSubtitle>
-              <PixelHeroDescription>
-                Experience the ultimate 8-bit gaming platform powered by cutting-edge retro UI components
-              </PixelHeroDescription>
-              
-              <div className="mt-8">
-                <h3 className="text-xl font-bold font-pixel mb-4 text-center">⏰ NEXT EVENT STARTS IN:</h3>
-                <PixelCountdown
-                  targetDate={new Date(Date.now() + 2 * 24 * 60 * 60 * 1000)}
-                  variant="digital"
-                  size="lg"
-                />
-              </div>
+      {/* Hero Section - Clean & Aesthetic */}
+      <section className="border-b-4 border-[#ff8c00] bg-[#000000] py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto text-center space-y-8">
+            {/* Badge */}
+            <div className="flex justify-center">
+              <PixelHeroBadge className="text-lg px-6 py-2">🎮 LIVE NOW</PixelHeroBadge>
+            </div>
 
-              <PixelHeroActions>
-                <PixelButton size="lg" onClick={() => setShowAchievement(true)}>START PLAYING</PixelButton>
-                <PixelButton size="lg" variant="secondary">VIEW LEADERBOARD</PixelButton>
-              </PixelHeroActions>
-            </PixelHeroContent>
-          </PixelHero>
+            {/* Title */}
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-7xl font-bold font-pixel text-pixel-dark-secondary leading-tight">
+                RETRO GAME CENTRAL
+              </h1>
+              <p className="text-xl md:text-2xl text-[#ff8c00] font-pixel">
+                Built with Special Components
+              </p>
+              <p className="text-base md:text-lg text-gray-400 max-w-2xl mx-auto">
+                Experience the ultimate 8-bit gaming platform powered by cutting-edge retro UI components
+              </p>
+            </div>
+
+            {/* Countdown */}
+            <div className="pt-8">
+              <h3 className="text-xl font-bold font-pixel mb-6 text-center text-white">⏰ NEXT EVENT STARTS IN:</h3>
+              <PixelCountdown
+                targetDate={new Date(Date.now() + 2 * 24 * 60 * 60 * 1000)}
+                variant="digital"
+                size="lg"
+              />
+            </div>
+
+            {/* Actions */}
+            <div className="flex flex-wrap gap-4 justify-center pt-4">
+              <PixelButton size="lg" onClick={() => setShowAchievement(true)}>START PLAYING</PixelButton>
+              <PixelButton size="lg" variant="secondary">VIEW LEADERBOARD</PixelButton>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -259,6 +266,39 @@ function unlockAchievement(id) {
                 size="sm"
               />
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Audio Visualizer Section */}
+      <section className="border-b-4 border-[#ff8c00] py-16 bg-[#000000]">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold font-pixel mb-12 text-center text-[#00ff00]">
+            🎵 AUDIO VISUALIZER
+          </h2>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <PixelCard>
+              <PixelCardHeader>
+                <PixelCardTitle>Bars Mode</PixelCardTitle>
+              </PixelCardHeader>
+              <PixelCardContent>
+                <div className="h-64 flex items-center justify-center bg-black/50 rounded">
+                  <PixelAudioVisualizer variant="bars" animate={true} />
+                </div>
+              </PixelCardContent>
+            </PixelCard>
+
+            <PixelCard>
+              <PixelCardHeader>
+                <PixelCardTitle>Wave Mode</PixelCardTitle>
+              </PixelCardHeader>
+              <PixelCardContent>
+                <div className="h-64 flex items-center justify-center bg-black/50 rounded">
+                  <PixelAudioVisualizer variant="wave" animate={true} />
+                </div>
+              </PixelCardContent>
+            </PixelCard>
           </div>
         </div>
       </section>
